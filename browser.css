@@ -1,0 +1,153 @@
+/* Add OS specific fonts */
+body {
+  font-family: -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen-Sans,
+      Ubuntu,
+      Cantarell,
+      'Helvetica Neue',
+      sans-serif,
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol' !important;
+  text-rendering: optimizeLegibility !important;
+  font-feature-settings: 'liga', 'clig', 'kern';
+}
+
+/* Bind the topbar as the window's draggable region */
+.hn {
+  -webkit-app-region: drag;
+}
+
+/*
+ * Topbar related styles
+ * Proportion:
+ *   40/56 = 0.7142857143...
+ *   old * 0.7142857143 = new
+ */
+
+/* Topbar height */
+.hn,
+.hn::before {
+  padding-left: 76px;
+  height: 40px !important;
+}
+
+/* Application top padding */
+.cM {
+  padding-top: 40px !important;
+}
+
+/* Folder title in topbar */
+.c7 {
+  font-size: 1.3em !important;
+}
+
+/* Hamburger menu in topbar */
+.c7 .ew, .c7 .ew::before {
+  background-size: 17px 17px;
+  height: 17px;
+  width: 17px;
+}
+.aO {
+  padding: 11.5px 19px !important;
+}
+.aO.ew img {
+  width: 17px;
+  height: 17px;
+}
+
+/* Search bar height */
+.bS, .bS::before {
+  height: 26px !important;
+}
+
+/* Remove left margin when sidebar is opened */
+.M .bS {
+  margin-left: 0 !important;
+}
+
+/* Search icon sizes and position */
+.bS .rj {
+  height: 26px;
+  width: 51.5px;
+}
+.bS .rj img.bD {
+  height: 17px;
+  left: 17px;
+  top: 5px;
+  width: 17px;
+}
+
+/* Search input height */
+.gc.sp,
+.gc.sc.qW {
+  height: 26px;
+  font-size: 1em;
+}
+
+/* Search dropdown position */
+.ne.r9 {
+  padding-top: 40px;
+}
+
+/* Pin Toggle */
+.lE .tg {
+  height: 12px;
+  width: 24px;
+  margin: 0 8px 0 14px;
+  padding-left: 8px;
+}
+.lE .tg .gH {
+  width: 24px;
+}
+.lE .tg .gH .b2 {
+  height: 18px;
+  margin-top: -3px;
+  width: 18px;
+  transform: translateX(-8px);
+}
+.lE .tg .gH .b2.bM {
+  transform: translateX(14px);
+}
+.lE .tg .gH .b2 img.lX {
+  margin-left: 3px;
+  margin-top: 3.5px;
+  background-size: 11px;
+  height: 11px;
+  width: 11px;
+}
+
+/* Hangouts, Apps and Notification contrainers */
+.f1,
+#gb,
+.gb_zf,
+.gb_lb.gb_yg.gb_R.gb_xg.gb_T.gb_X {
+  height: 40px !important;
+}
+
+/* Hangouts Icon */
+#lQGP9e {
+  display: none;
+}
+
+/* Goolge Apps Icon */
+#gbwa {
+  display: none;
+}
+
+/* Google Notifications Icon */
+.gb_R.gb_Jc {
+  display: none;
+}
+
+.gb_b.gb_gb.gb_R,
+.gb_bb.gbii {
+  height: 26px;
+  width: 26px;
+}
+.gb_bb.gbii {
+  background-size: 28px 28px;
+}

@@ -1,0 +1,62 @@
+{
+  "name": "inboxer",
+  "version": "0.1.0",
+  "description": "Simple client for Google Inbox",
+  "repository": "denysdovhan/inboxer",
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps",
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --mac --linux --win"
+  },
+  "keywords": [
+    "client",
+    "inbox",
+    "gmail",
+    "electron",
+    "app"
+  ],
+  "author": {
+    "name": "Denys Dovhan",
+    "email": "denysdovhan@gmail.com",
+    "url": "denysdovhan.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.7.9",
+    "electron-builder": "^19.42.2"
+  },
+  "dependencies": {
+    "electron-context-menu": "^0.9.1",
+    "electron-dl": "^1.10.0",
+    "electron-is-dev": "^0.3.0",
+    "electron-store": "^1.3.0"
+  },
+  "build": {
+    "files": ["**/*"],
+    "appId": "com.denysdovhan.inboxer",
+    "mac": {
+      "category": "public.app-category.social-networking",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "dmg": {
+      "iconSize": 160,
+      "contents": [
+        {
+          "x": 180,
+          "y": 170
+        },
+        {
+          "x": 480,
+          "y": 170,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  }
+}
