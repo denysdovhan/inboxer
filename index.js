@@ -1,8 +1,9 @@
 'use strict';
 
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, shell } = require('electron');
 const fs = require('fs');
 const path = require('path');
+const minimatch = require('minimatch-all');
 const config = require('./config');
 
 app.setAppUserModelId('com.denysdovhan.inboxer');
@@ -27,6 +28,19 @@ const isRunning = app.makeSingleInstance(() => {
 
 if (isRunning) {
   app.quit();
+}
+
+function allowedUrl(url) {
+  const urls = [
+    'https://accounts.google.com/@(u|AddSession|ServiceLogin|CheckCookie|Logout){**/**,**}',
+    'https://accounts.google.com/signin/usernamerecovery**',
+    'http://www.google.*/accounts/Logout2**',
+    'https://inbox.google.com{**/**,**}',
+    // 'https://accounts.youtube.com/accounts/SetSID',
+    'https://{accounts.youtube,inbox.google}.com/accounts/@(SetOSID|SetSID)**'
+  ];
+
+  return minimatch(url, urls);
 }
 
 function createMainWindow() {
@@ -75,6 +89,22 @@ app.on('ready', () => {
 
     mainWindow.show();
   });
+
+  webContents.on('will-navigate', (e, url) => {
+    if (!allowedUrl(url)) {
+      e.preventDefault();
+      shell.openExternal(url);
+    }
+  })
+
+  webContents.on('new-window', (e, url) => {
+    e.preventDefault();
+    if (allowedUrl(url)) {
+      webContents.loadURL(url);
+      return;
+    }
+    shell.openExternal(url);
+  })
 });
 
 app.on('activate', () => {
