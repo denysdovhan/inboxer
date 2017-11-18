@@ -234,7 +234,19 @@ body {
   width: 100px;
   text-overflow: ellipsis;
 }
-
+/* Active user in white topbar */
 .gb_ea .active-user-name {
   color: #212121;
+}
+
+/* Reminder's popup */
+.eG .bb {
+  width: 80%;
+}
+
+/* Keyboard shortcuts popup */
+.uS {
+  overflow: scroll;
+  width: 80% !important;
+  max-width: 878px;
 }
