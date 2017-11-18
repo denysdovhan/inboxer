@@ -7,7 +7,6 @@ const minimatch = require('minimatch-all');
 const config = require('./config');
 
 app.setAppUserModelId('com.denysdovhan.inboxer');
-app.disableHardwareAcceleration();
 
 require('electron-dl')();
 require('electron-context-menu')();
@@ -36,7 +35,6 @@ function allowedUrl(url) {
     'https://accounts.google.com/signin/usernamerecovery**',
     'http://www.google.*/accounts/Logout2**',
     'https://inbox.google.com{**/**,**}',
-    // 'https://accounts.youtube.com/accounts/SetSID',
     'https://{accounts.youtube,inbox.google}.com/accounts/@(SetOSID|SetSID)**'
   ];
 
@@ -59,7 +57,6 @@ function createMainWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'browser.js'),
       nodeIntegration: false,
-      plugins: true
     }
   });
 
