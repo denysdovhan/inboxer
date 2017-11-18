@@ -22,6 +22,46 @@ body {
 }
 
 /*
+ * Sign In Page
+ */
+.JYXKFb,
+.google-header-bar {
+  display: none;
+}
+
+.wrapper {
+  -webkit-app-region: drag;
+  user-select: none; 
+}
+.wrapper .card.signin-card {
+  -webkit-app-region: no-drag;
+}
+
+.RgEUV.ZnXjYc,
+.main.content {
+  padding-top: 50px;
+  padding-bottom: 0;
+}
+
+.main-content {
+  height: 400px !important;
+}
+
+.card-mask {
+  min-height: 250px !important;
+}
+
+.tagline,
+.logo-strip {
+  display: none !important;
+}
+
+.zOB73,
+.google-footer-bar {
+  display: none;
+}
+
+/*
  * Topbar related styles
  * Proportion:
  *   40/56 = 0.7142857143...
@@ -123,8 +163,9 @@ body {
 /* Hangouts, Apps and Notification contrainers */
 .f1,
 #gb,
-.gb_zf,
-.gb_lb.gb_yg.gb_R.gb_xg.gb_T.gb_X {
+.gb_Ef,
+.gb_Bf,
+.gb_Ef>.gb_R {
   height: 40px !important;
 }
 
@@ -139,15 +180,61 @@ body {
 }
 
 /* Google Notifications Icon */
-.gb_R.gb_Jc {
+.gb_R.gb_6c.gb_Kc.gb_Lc {
   display: none;
 }
 
+/* Google User */
 .gb_b.gb_gb.gb_R,
 .gb_bb.gbii {
   height: 26px;
   width: 26px;
+  margin-top: 1px;
 }
 .gb_bb.gbii {
   background-size: 28px 28px;
+}
+
+/* Letter's header top margin */
+.ac-P .bH {
+  top: 40px !important;
+}
+
+/* Google+ Link in profile popup */
+.gb_vb {
+  display: none;
+}
+
+/* Avatar in popup */
+.gb_Ab.gbip {
+  width: 67px;
+  height: 67px;
+  background-size: 67px 67px;
+}
+
+/* 'Change' in popup's avatar */
+.gb_mb {
+  width: 67px !important;
+}
+
+/* Avatar in topbar goes up */
+.gb_bb.gbii {
+  display: inline-block;
+  margin: 0;
+}
+
+/* A name of active user near the avatar in topbar */
+.active-user-name {
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  padding-left: 10px;
+  line-height: 24px;
+  display: inline-block;
+  color: #ffffff;
+  width: 100px;
+  text-overflow: ellipsis;
+}
+
+.gb_ea .active-user-name {
+  color: #212121;
 }

@@ -5,7 +5,7 @@ const ElectronStore = require('electron-store');
 module.exports = new ElectronStore({
   defaults: {
     windowState: {
-      width: 800,
+      width: 900,
       height: 600
     },
   },
