@@ -1,4 +1,10 @@
+const { ipcRenderer: ipc } = require('electron');
+
 const $ = document.querySelector.bind(document);
+
+ipc.on('show-preferences', () => {
+  $('.oin9Fc.cQ.lN').click();
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   // do your setup here

@@ -1,10 +1,11 @@
-'use strict';
-
-const { app, BrowserWindow, shell } = require('electron');
+const {
+  app, BrowserWindow, Menu, shell,
+} = require('electron');
 const fs = require('fs');
 const path = require('path');
 const minimatch = require('minimatch-all');
 const config = require('./config');
+const appMenu = require('./menu');
 
 app.setAppUserModelId('com.denysdovhan.inboxer');
 
@@ -77,6 +78,7 @@ function createMainWindow() {
 }
 
 app.on('ready', () => {
+  Menu.setApplicationMenu(appMenu);
   mainWindow = createMainWindow();
 
   const { webContents } = mainWindow;
