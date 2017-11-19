@@ -250,3 +250,9 @@ body {
   width: 80% !important;
   max-width: 878px;
 }
+
+/* Hide help item in left menu */
+/* @TODO: make it available in separate window */
+.oCKk2 {
+  display: none !important;
+}
