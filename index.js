@@ -53,6 +53,7 @@ function createMainWindow() {
     height: windowState.height,
     minWidth: 890,
     minHeight: 400,
+    alwaysOnTop: config.get('alwaysOnTop'),
     icon: path.join(__dirname, 'Logo.png'),
     titleBarStyle: 'hidden-inset',
     webPreferences: {

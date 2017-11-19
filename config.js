@@ -8,5 +8,6 @@ module.exports = new ElectronStore({
       width: 900,
       height: 600
     },
+    alwaysOnTop: false,
   },
 });
