@@ -36,7 +36,7 @@ function allowedUrl(url) {
     'https://accounts.google.com/signin/usernamerecovery**',
     'http://www.google.*/accounts/Logout2**',
     'https://inbox.google.com{**/**,**}',
-    'https://{accounts.youtube,inbox.google}.com/accounts/@(SetOSID|SetSID)**'
+    'https://{accounts.youtube,inbox.google}.com/accounts/@(SetOSID|SetSID)**',
   ];
 
   return minimatch(url, urls);
@@ -59,7 +59,7 @@ function createMainWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'browser.js'),
       nodeIntegration: false,
-    }
+    },
   });
 
   if (process.platform === 'darwin') {
@@ -95,7 +95,7 @@ app.on('ready', () => {
       e.preventDefault();
       shell.openExternal(url);
     }
-  })
+  });
 
   webContents.on('new-window', (e, url) => {
     e.preventDefault();
@@ -104,7 +104,7 @@ app.on('ready', () => {
       return;
     }
     shell.openExternal(url);
-  })
+  });
 });
 
 app.on('activate', () => {

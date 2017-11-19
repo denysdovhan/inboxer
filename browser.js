@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Change application title on login page
   const appTitle = $('.wrapper .banner h1');
   if (appTitle) {
-    appTitle.innerHTML = 'Inboxer'
+    appTitle.innerHTML = 'Inboxer';
   }
 
   // Put the name of active user on the topbar
@@ -25,4 +25,3 @@ document.addEventListener('DOMContentLoaded', () => {
     topbarUserLink.appendChild(span);
   }
 });
-
