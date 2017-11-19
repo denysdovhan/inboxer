@@ -9,7 +9,8 @@
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "format": "prettier-eslint --write **/*.js"
   },
   "keywords": [
     "client",
@@ -25,10 +26,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "electron": "^1.7.9",
-    "electron-builder": "^19.42.2"
+    "electron-builder": "^19.42.2",
+    "eslint": "^4.11.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "prettier-eslint-cli": "^4.4.0"
   },
   "dependencies": {
+    "electron": "^1.7.9",
     "electron-context-menu": "^0.9.1",
     "electron-dl": "^1.10.0",
     "electron-is-dev": "^0.3.0",
