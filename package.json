@@ -29,9 +29,10 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint app",
+    "test": "npm run lint && npm run dist",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder",
+    "dist": "electron-builder --mac --linux",
     "format": "prettier-eslint --write **/*.js"
   },
   "devDependencies": {
