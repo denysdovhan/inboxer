@@ -1,5 +1,5 @@
 const { app, shell, Menu } = require('electron');
-const pkg = require('./package');
+const pkg = require('../../package');
 const config = require('./config');
 const report = require('./report');
 

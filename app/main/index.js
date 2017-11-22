@@ -1,8 +1,8 @@
+const fs = require('fs');
+const path = require('path');
 const {
   app, BrowserWindow, Menu, shell,
 } = require('electron');
-const fs = require('fs');
-const path = require('path');
 const minimatch = require('minimatch-all');
 const config = require('./config');
 const appMenu = require('./menu');
@@ -57,7 +57,7 @@ function createMainWindow() {
     icon: path.join(__dirname, 'Logo.png'),
     titleBarStyle: 'hidden-inset',
     webPreferences: {
-      preload: path.join(__dirname, 'browser.js'),
+      preload: path.join(__dirname, '..', 'renderer', 'browser.js'),
       nodeIntegration: false,
     },
   });
@@ -85,7 +85,7 @@ app.on('ready', () => {
   const { webContents } = mainWindow;
 
   webContents.on('dom-ready', () => {
-    webContents.insertCSS(fs.readFileSync(path.join(__dirname, 'browser.css'), 'utf8'));
+    webContents.insertCSS(fs.readFileSync(path.join(__dirname, '../renderer/browser.css'), 'utf8'));
 
     mainWindow.show();
   });

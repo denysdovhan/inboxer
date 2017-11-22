@@ -24,6 +24,7 @@
     "electron",
     "app"
   ],
+  "main": "app/main",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "start": "electron .",
