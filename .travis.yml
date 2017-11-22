@@ -1,24 +1,8 @@
+os: osx
 language: node_js
 node_js: node
-
 cache:
   directories:
     - node_modules
-
-os:
-  - osx
-  - linux
-
-addons:
-  apt:
-    packages:
-      - icnsutils
-      - graphicsmagick
-      - xz-utils
-      - rpm
-      - bsdtar
-      - gcc-multilib
-      - g++-multilib
-
 script:
   - npm test
