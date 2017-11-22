@@ -3,14 +3,19 @@
   "productName": "Inboxer",
   "version": "0.1.0",
   "description": "Simple client for Google Inbox",
-  "repository": "denysdovhan/inboxer",
-  "scripts": {
-    "postinstall": "electron-builder install-app-deps",
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "format": "prettier-eslint --write **/*.js"
+  "author": {
+    "name": "Denys Dovhan",
+    "email": "denysdovhan@gmail.com",
+    "url": "https://denysdovhan.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/denysdovhan/inboxer#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/denysdovhan/inboxer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/denysdovhan/inboxer/issues"
   },
   "keywords": [
     "client",
@@ -19,13 +24,16 @@
     "electron",
     "app"
   ],
-  "author": {
-    "name": "Denys Dovhan",
-    "email": "denysdovhan@gmail.com",
-    "url": "https://denysdovhan.com"
+  "scripts": {
+    "postinstall": "electron-builder install-app-deps",
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "format": "prettier-eslint --write **/*.js"
   },
-  "license": "MIT",
   "devDependencies": {
+    "electron": "^1.7.9",
     "electron-builder": "^19.42.2",
     "eslint": "^4.11.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -33,7 +41,6 @@
     "prettier-eslint-cli": "^4.4.0"
   },
   "dependencies": {
-    "electron": "^1.7.9",
     "electron-context-menu": "^0.9.1",
     "electron-dl": "^1.10.0",
     "electron-is-dev": "^0.3.0",

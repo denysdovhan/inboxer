@@ -246,6 +246,7 @@ body {
 
 /* Keyboard shortcuts popup */
 .uS {
+  user-select: none;
   overflow: scroll;
   width: 80% !important;
   max-width: 878px;
