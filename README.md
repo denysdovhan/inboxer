@@ -45,25 +45,25 @@ You can download the latest version on [Releases](https://github.com/denysdovhan
 
 Inboxer supports all Google Inbox keyboard shortcuts, system-specific keybindings and more. Additional keybindings are listed below:
 
-| Description | Keybinding |
-|-------------|------------|
-| Preferences | <kbd>Cmd/Ctrl</kbd> <kdb>,</kbd> |
-| Compose Message | <kbd>Cmd/Ctrl</kbd> <kdb>N</kbd> |
-| Create Reminder | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kdb>N</kbd> |
-| Go to Inbox | <kbd>Cmd/Ctrl</kbd> <kdb>I</kbd> |
-| Go to Shoozed | <kbd>Cmd/Ctrl</kbd> <kdb>S</kbd> |
-| Go to Done | <kbd>Cmd/Ctrl</kbd> <kdb>D</kbd> |
-| Drafts | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kdb>D</kbd> |
-| Sent | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kdb>S</kbd> |
-| Reminders | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kdb>R</kbd> |
-| Trash | <kbd>Alt</kbd> <kbd>Shift</kbd> <kdb>T</kbd> |
-| Spam | <kbd>Alt</kbd> <kbd>Shift</kbd> <kdb>S</kbd> |
-| Open Contacts | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kdb>C</kbd> |
-| Search | <kbd>Cmd/Ctrl</kbd> <kdb>F</kbd> |
-| Toggle Sidebar | <kbd>Cmd/Ctrl</kbd> <kdb>/</kbd> |
-| Always on Top | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kdb>T</kbd> |
-| Keyboard Shortcuts Reference | <kbd>Shift</kbd> <kdb>?</kbd> |
-| Toggle Developer Tools | <kbd>Option</kbd> <kdb>Cmd</kbd> <kdb>I</kbd> (macOS) or <kbd>Ctrl</kbd> <kdb>Shift</kbd> <kdb>I</kbd> |
+| Description                  | Keys                  
+|------------------------------|---------
+| Preferences                  | <kbd>Cmd/Ctrl</kbd> <kbd>,</kbd>
+| Compose Message              | <kbd>Cmd/Ctrl</kbd> <kbd>N</kbd>
+| Create Reminder              | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>N</kbd>
+| Go to Inbox                  | <kbd>Cmd/Ctrl</kbd> <kbd>I</kbd>
+| Go to Shoozed                | <kbd>Cmd/Ctrl</kbd> <kbd>S</kbd>
+| Go to Done                   | <kbd>Cmd/Ctrl</kbd> <kbd>D</kbd>
+| Drafts                       | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>D</kbd>
+| Sent                         | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>S</kbd>
+| Reminders                    | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>R</kbd>
+| Trash                        | <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>T</kbd>
+| Spam                         | <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>S</kbd>
+| Open Contacts                | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
+| Search                       | <kbd>Cmd/Ctrl</kbd> <kbd>/</kbd>
+| Toggle Sidebar               | <kbd>Cmd/Ctrl</kbd> <kbd>F</kbd>
+| Toggle "Always on Top"       | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>T</kbd>
+| Keyboard Shortcuts Reference | <kbd>Shift</kbd> <kbd>,</kbd>
+| Toggle Developer Tools       | <kbd>Option</kbd> <kbd>Cmd</kbd> <kbd>I</kbd> _(macOS)_ or <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd>
 
 ## Disclaimer
 
