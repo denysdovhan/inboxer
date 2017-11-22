@@ -1,7 +1,8 @@
 {
+  "private": true,
   "name": "inboxer",
   "productName": "Inboxer",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "Simple client for Google Inbox",
   "author": {
     "name": "Denys Dovhan",
