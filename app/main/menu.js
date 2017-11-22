@@ -98,21 +98,21 @@ const template = [
     label: 'View',
     submenu: [
       {
-        label: 'Got to Inbox',
+        label: 'Go to Inbox',
         accelerator: 'CmdOrCtrl+I',
         click(menuItem, focusedWindow) {
           sendAction(focusedWindow, 'go-to-inbox');
         },
       },
       {
-        label: 'Got to Shoozed',
+        label: 'Go to Shoozed',
         accelerator: 'CmdOrCtrl+S',
         click(menuItem, focusedWindow) {
           sendAction(focusedWindow, 'go-to-shoozed');
         },
       },
       {
-        label: 'Got to Done',
+        label: 'Go to Done',
         accelerator: 'CmdOrCtrl+D',
         click(menuItem, focusedWindow) {
           sendAction(focusedWindow, 'go-to-done');
@@ -247,7 +247,6 @@ const template = [
     submenu: [
       {
         label: 'Mark Done',
-        accelerator: ['e', 'y'],
         click(menuItem, focusedWindow) {
           sendKeybinding(focusedWindow, 'e');
         },
@@ -392,7 +391,7 @@ const template = [
       {
         type: 'checkbox',
         label: 'Always on Top',
-        accelerator: 'Cmd+Shift+T',
+        accelerator: 'CmdOrCtrl+Shift+T',
         checked: config.get('alwaysOnTop'),
         click(menuItem, focusedWindow) {
           config.set('alwaysOnTop', menuItem.checked);
