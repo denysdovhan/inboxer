@@ -3,6 +3,8 @@ const path = require('path');
 const {
   app, BrowserWindow, Menu, shell,
 } = require('electron');
+const log = require('electron-log');
+const { autoUpdater } = require('electron-updater');
 const minimatch = require('minimatch-all');
 const config = require('./config');
 const appMenu = require('./menu');
@@ -11,6 +13,9 @@ app.setAppUserModelId('com.denysdovhan.inboxer');
 
 require('electron-dl')();
 require('electron-context-menu')();
+
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
 
 const mainURL = 'https://inbox.google.com/';
 
@@ -81,6 +86,8 @@ function createMainWindow() {
 app.on('ready', () => {
   Menu.setApplicationMenu(appMenu);
   mainWindow = createMainWindow();
+
+  autoUpdater.checkForUpdatesAndNotify();
 
   const { webContents } = mainWindow;
 

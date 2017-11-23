@@ -15,7 +15,7 @@ Inboxer — is an unofficial Google Inbox client for desktop platforms. It's bui
 * Familiar Google Inbox interface
 * Cross-platform (macOS/Linux, Windows is planed)
 * Useful Keyboard shortcuts
-* Silent auto-updates
+* Auto-updates to the latest version
 * Multiple accounts
 * Optional Always on Top
 * **TODO:** Desktop notifications
