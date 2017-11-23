@@ -10,7 +10,7 @@
             "windows": {
               "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
             },
-            "args" : ["."]
+            "args" : ["app/main"]
         },
         {
             "name": "Renderer Process",
@@ -21,10 +21,10 @@
               "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
             },
             "runtimeArgs": [
-              "${workspaceRoot}/index.js",
+              "${workspaceRoot}/app/main/index.js",
               "--remote-debugging-port=9222"
             ],
-            "webRoot": "${workspaceRoot}"
+            "webRoot": "${workspaceRoot}/app/renderer"
           }
     ]
 }
