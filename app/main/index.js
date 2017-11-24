@@ -8,6 +8,7 @@ const { autoUpdater } = require('electron-updater');
 const minimatch = require('minimatch-all');
 const config = require('./config');
 const appMenu = require('./menu');
+const analytics = require('./analytics');
 
 app.setAppUserModelId('com.denysdovhan.inboxer');
 
@@ -88,7 +89,7 @@ app.on('ready', () => {
   Menu.setApplicationMenu(appMenu);
   mainWindow = createMainWindow();
 
-  autoUpdater.checkForUpdatesAndNotify();
+  analytics.init();
 
   const { webContents } = mainWindow;
 
