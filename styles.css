@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+.heading {
+  font-size: 7rem;
+  line-height: 1;
+  font-weight: 300;
+  color: #4285F4;
+}
+
+.subheading {
+  font-weight: 300;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+  padding-top: 2.5rem;
+  overflow: hidden;
+}
+
+.page-header__titles {
+  text-align: center;
+}
+
+.page-header__preview {
+  width: 100%;
+  height: 100%;
+  background-image: url('images/inboxer-view.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.download-btn,
+.download-btn:hover,
+.download-btn:active,
+.download-btn:focus {
+  background-color: #4285F4;
+}

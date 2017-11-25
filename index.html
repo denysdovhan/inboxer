@@ -21,10 +21,33 @@
     <title>Inboxer — Google Inbox Desktop App</title>
     <!-- Icon -->
     <link rel="icon" href="images/favicon.ico" sizes="32x32">
+    <!-- Styles -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.muicss.com/mui-0.9.30/css/mui.min.css">
+    <link rel="stylesheet" href="styles.css">
     <!-- Scripts -->
+    <script src="//cdn.muicss.com/mui-0.9.30/js/mui.min.js"></script>
     <script defer src="main.js"></script>
   </head>
   <body>
-    <h1>Hello Inboxer</h1>
+    <header class="page-header">
+      <div class="page-header__titles">
+        <h1 class="heading">Inboxer</h1>
+        <p class="mui--text-dark-secondary mui--text-headline subheading">Unofficial, free and open-source Google Inbox Desktop App</p>
+        <div>
+          <a href="https://github.com/denysdovhan/inboxer/releases/latest" class="mui-btn mui-btn--primary mui-btn--large mui-btn--raised download-btn">
+            <span class="fa fa-download"></span>
+            Download
+          </a>
+          <a href="https://github.com/denysdovhan/inboxer" class="mui-btn mui-btn--large mui-btn--raised">
+            <span class="fa fa-github"></span>
+            Source
+          </a>
+          <p class="mui--text-dark-secondary mui--text-caption">macOS and Linux versions are available</p>
+        </div>
+      </div>
+      <div class="page-header__preview"></div>
+    </header>
   </body>
 </html>
