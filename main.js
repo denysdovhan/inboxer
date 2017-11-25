@@ -16,9 +16,9 @@ function getLatestRelease(ext) {
     .then(res => res.json())
     .then((json) => {
       const requiredAsset = json.assets.filter(asset => asset.name.includes(ext));
-      console.log(requiredAsset);
       return requiredAsset[0].browser_download_url;
     })
+    // eslint-disable-next-line
     .catch(err => console.error(err));
 }
 
