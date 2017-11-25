@@ -31,8 +31,7 @@ getLatestRelease(ext)
   .then((url) => {
     // If url is not available, keep download button as it is
     if (!url) return;
-    const downloadBtn = document.getElementById('download');
-    downloadBtn.href = url;
+    document.getElementById('download').href = url;
     // eslint-disable-next-line
-    downloadBtn.innerHTML = 'Download .' + ext;
+    document.getElementById('download-content').textContent = 'Download .' + ext;
   });
