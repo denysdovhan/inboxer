@@ -15,13 +15,13 @@ Inboxer — is an unofficial Google Inbox client for desktop platforms. It's bui
 * Familiar Google Inbox interface
 * Cross-platform (macOS/Linux, Windows is planed)
 * Useful Keyboard shortcuts
-* Auto-updates to the latest version
 * Multiple accounts
 * Optional Always on Top
 * **TODO:** Desktop notifications
 * **TODO:** Dark theme
 * **TODO:** Custom text size
 * **TODO:** Ability to use as default mail client
+* **TODO:** Auto-updates to the latest version (help is needed 🙏🏻)
 
 All feature requests and contributions are welcome!
 

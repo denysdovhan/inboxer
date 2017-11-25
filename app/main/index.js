@@ -17,7 +17,6 @@ require('electron-context-menu')();
 
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
-autoUpdater.checkForUpdatesAndNotify();
 
 const mainURL = 'https://inbox.google.com/';
 
@@ -90,6 +89,7 @@ app.on('ready', () => {
   mainWindow = createMainWindow();
 
   analytics.init();
+  autoUpdater.checkForUpdates();
 
   const { webContents } = mainWindow;
 
