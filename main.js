@@ -28,5 +28,6 @@ getLatestRelease(ext)
   .then((url) => {
     const downloadBtn = document.getElementById('download');
     downloadBtn.href = url;
-    downloadBtn.innerHTML = `Download .${ext}`;
+    // eslint-disable-next-line
+    downloadBtn.innerHTML = 'Download .' + ext;
   });
