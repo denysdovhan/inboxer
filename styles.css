@@ -27,7 +27,7 @@ body {
   overflow: hidden;
 }
 
-.page-header__titles {
+.page-header__content {
   text-align: center;
 }
 
@@ -40,9 +40,34 @@ body {
   background-position: center;
 }
 
+.page-header__preview img {
+  width: 100%;
+}
+
 .download-btn,
 .download-btn:hover,
 .download-btn:active,
 .download-btn:focus {
   background-color: #4285F4;
+}
+
+.download-caption {
+  margin-top: 1rem;
+}
+
+.page-footer {
+  overflow: hidden;
+  background-color: #4285F4;
+  box-shadow: 0 2px 2px rgba(0,0,0,.2) inset;
+}
+
+.page-footer__content {
+  margin: 3rem auto;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 300;
+}
+
+.page-footer__content a {
+  color: #ffffff;
 }

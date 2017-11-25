@@ -6,7 +6,7 @@ function getExtension() {
   } else if (userAgent.match(/windows/)) {
     return 'exe';
   } else if (userAgent.match(/linux/)) {
-    return 'AppImage';
+    return 'deb';
   }
   return undefined;
 }
@@ -22,8 +22,11 @@ function getLatestRelease(ext) {
     .catch(err => console.error(err));
 }
 
-getLatestRelease(getExtension())
+const ext = getExtension();
+
+getLatestRelease(ext)
   .then((url) => {
-    console.log(url);
-    document.getElementById('download').href = url;
+    const downloadBtn = document.getElementById('download');
+    downloadBtn.href = url;
+    downloadBtn.innerHTML = `Download .${ext}`;
   });
