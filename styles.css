@@ -66,6 +66,7 @@ body {
   text-align: center;
   color: #ffffff;
   font-weight: 300;
+  padding: 0 1rem;
 }
 
 .page-footer__content a {
