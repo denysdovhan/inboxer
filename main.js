@@ -19,13 +19,18 @@ function getLatestRelease(ext) {
       return requiredAsset[0].browser_download_url;
     })
     // eslint-disable-next-line
-    .catch(err => console.error(err));
+    .catch(err => {
+      console.error(err);
+      return null;
+    });
 }
 
 const ext = getExtension();
 
 getLatestRelease(ext)
   .then((url) => {
+    // If url is not available, keep download button as it is
+    if (!url) return;
     const downloadBtn = document.getElementById('download');
     downloadBtn.href = url;
     // eslint-disable-next-line
