@@ -2,8 +2,10 @@ const { app, shell, Menu } = require('electron');
 const pkg = require('../../package');
 const config = require('./config');
 const report = require('./report');
+const analytics = require('./analytics');
 
 function sendAction(win, action) {
+  analytics.track(action);
   win.webContents.send(action);
 }
 

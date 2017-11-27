@@ -100,6 +100,7 @@ app.on('ready', () => {
   });
 
   webContents.on('will-navigate', (e, url) => {
+    analytics.track('will-navigate');
     if (!allowedUrl(url)) {
       e.preventDefault();
       shell.openExternal(url);
@@ -107,6 +108,7 @@ app.on('ready', () => {
   });
 
   webContents.on('new-window', (e, url) => {
+    analytics.track('new-window');
     e.preventDefault();
     if (allowedUrl(url)) {
       webContents.loadURL(url);
@@ -121,6 +123,7 @@ app.on('activate', () => {
 });
 
 app.on('before-quit', () => {
+  analytics.track('quit');
   isQuitting = true;
 
   if (!mainWindow.isFullScreen()) {
