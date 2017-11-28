@@ -17,11 +17,11 @@ Inboxer — is an unofficial Google Inbox client for desktop platforms. It's bui
 * Useful Keyboard shortcuts
 * Multiple accounts
 * Optional Always on Top
+* Auto-updates to the latest version
 * **TODO:** Desktop notifications
 * **TODO:** Dark theme
 * **TODO:** Custom text size
 * **TODO:** Ability to use as default mail client
-* **TODO:** Auto-updates to the latest version (help is needed 🙏🏻)
 
 All feature requests and contributions are welcome!
 
