@@ -4,6 +4,7 @@ const {
   app, BrowserWindow, Menu, shell,
 } = require('electron');
 const log = require('electron-log');
+const isDev = require('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
 const minimatch = require('minimatch-all');
 const config = require('./config');
@@ -14,9 +15,6 @@ app.setAppUserModelId('com.denysdovhan.inboxer');
 
 require('electron-dl')();
 require('electron-context-menu')();
-
-autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = 'info';
 
 const mainURL = 'https://inbox.google.com/';
 
@@ -89,7 +87,12 @@ app.on('ready', () => {
   mainWindow = createMainWindow();
 
   analytics.init();
-  autoUpdater.checkForUpdates();
+
+  if (!isDev && !process.platform !== 'linux') {
+    autoUpdater.logger = log;
+    autoUpdater.logger.transports.file.level = 'info';
+    autoUpdater.checkForUpdatesAndNotify();
+  }
 
   const { webContents } = mainWindow;
 
