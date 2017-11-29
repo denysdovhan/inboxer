@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Put the name of active user on the topbar
-  const activeUserName = $('div.gb_Bb.gb_Cb');
-  const topbarUserLink = $('a.gb_b.gb_gb.gb_R');
+  const activeUserName = $('div.gb_Bb.gb_Ab');
+  const topbarUserLink = $('a.gb_b.gb_fb.gb_R');
   if (activeUserName && topbarUserLink) {
     const span = document.createElement('span');
     span.textContent = activeUserName.textContent;

@@ -31,7 +31,7 @@ body {
 
 .wrapper {
   -webkit-app-region: drag;
-  user-select: none; 
+  user-select: none;
 }
 .wrapper .card.signin-card {
   -webkit-app-region: no-drag;
@@ -165,6 +165,8 @@ body {
 #gb,
 .gb_Ef,
 .gb_Bf,
+.gb_Df,
+.gb_Df>.gb_R,
 .gb_Ef>.gb_R {
   height: 40px !important;
 }
@@ -180,19 +182,30 @@ body {
 }
 
 /* Google Notifications Icon */
-.gb_R.gb_6c.gb_Kc.gb_Lc {
+.gb_R.gb_Kc {
   display: none;
 }
 
 /* Google User */
-.gb_b.gb_gb.gb_R,
+.gb_hb.gb_5c.gb_Cg.gb_R {
+  padding-left: 0;
+}
+.gb_b.gb_R,
 .gb_bb.gbii {
   height: 26px;
   width: 26px;
   margin-top: 1px;
 }
+.gb_ab.gbii,
 .gb_bb.gbii {
+  display: inline-block;
+  height: 26px;
+  width: 26px;
   background-size: 28px 28px;
+}
+/* Shadow circle around the avatar */
+.gb_b.gb_R > .gb_ab {
+  margin: 0;
 }
 
 /* Letter's header top margin */
@@ -201,11 +214,12 @@ body {
 }
 
 /* Google+ Link in profile popup */
-.gb_vb {
+.gb_ub {
   display: none;
 }
 
 /* Avatar in popup */
+.gb_zb.gbip,
 .gb_Ab.gbip {
   width: 67px;
   height: 67px;
@@ -213,6 +227,7 @@ body {
 }
 
 /* 'Change' in popup's avatar */
+.gb_lb,
 .gb_mb {
   width: 67px !important;
 }
@@ -228,7 +243,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
   padding-left: 10px;
-  line-height: 24px;
+  line-height: 26px;
   display: inline-block;
   color: #ffffff;
   width: 100px;
