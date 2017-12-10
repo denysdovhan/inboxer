@@ -133,3 +133,7 @@ app.on('before-quit', () => {
     config.set('windowState', mainWindow.getBounds());
   }
 });
+
+ipcMain.on('unread', (e, unreadCount) => {
+  app.setBadgeCount(unreadCount);
+});
