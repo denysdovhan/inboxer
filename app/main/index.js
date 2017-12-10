@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const {
-  app, BrowserWindow, Menu, shell,
+  app, BrowserWindow, Menu, shell, ipcMain,
 } = require('electron');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');

@@ -19,6 +19,11 @@ function sendClick(el) {
   el.dispatchEvent(createEvent('click'));
 }
 
+function sendNotification(notification) {
+  const { title, body, icon } = notification;
+  return new Notification(title, { body, icon });
+}
+
 function ancestor(el, selector) {
   if (el.webkitMatchesSelector(selector)) {
     return el;
@@ -31,5 +36,6 @@ module.exports = {
   $$,
   createEvent,
   sendClick,
+  sendNotification,
   ancestor,
 };

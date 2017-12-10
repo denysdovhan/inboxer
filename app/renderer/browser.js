@@ -1,9 +1,6 @@
 const { ipcRenderer: ipc } = require('electron');
-const {
-  $, $$, sendClick, ancestor,
-} = require('./dom');
-
-let seenMessages;
+const checkUnreads = require('./unreads');
+const { $, $$ } = require('./utils');
 
 ipc.on('toggle-sidebar', () => $('.aO.AK.ew').click());
 
@@ -28,94 +25,6 @@ ipc.on('go-to-search', () => $('.gc.sp.g-lW').click());
 
 ipc.on('sign-out', () => $('#gb_71').click());
 ipc.on('add-account', () => $('.gb_Fa.gb_Nf.gb_Ee.gb_Eb').click());
-
-function extractSubject(el) {
-  return ($('.lt', el) || $('.qG span', el)).textContent;
-}
-
-function extractAvatar(el, message) {
-  const brand = message.getAttribute('brand_avatar_url');
-  if (brand) {
-    return brand;
-  }
-
-  const image = $('img', el);
-  if (image) {
-    return image.src;
-  }
-
-  const icon = $('.pE', el);
-  return getComputedStyle(icon)['background-image'].replace(/url\((.+)\)/, '$1');
-}
-
-function extractSender(el, message) {
-  const brand = message.getAttribute('brand_name');
-  if (brand) {
-    return brand;
-  }
-
-  return $('[email]', el).textContent;
-}
-
-function getUnreadMessages() {
-  // not inside the inbox
-  const isInbox = $('.hA [title=Inbox]');
-
-  if (!isInbox) {
-    return [];
-  }
-
-  return Array.from($$('.ss')).map((message) => {
-    const ancestorEl = ancestor(message, '.jS');
-
-    if (ancestorEl.classList.contains('full-cluster-item') || $('.itemIconMarkedDone', ancestorEl)) {
-      return null;
-    }
-
-    return {
-      element: ancestorEl,
-      subject: extractSubject(ancestorEl),
-      sender: extractSender(ancestorEl, message),
-      avatar: extractAvatar(ancestorEl, message),
-    };
-  });
-}
-
-function sendNotification(message) {
-  new Notification(message.sender, {
-    tag: message.id,
-    body: message.subject,
-    icon: message.avatar,
-  })
-    .addEventListener('click', () => {
-      sendClick(message.element);
-    });
-}
-
-function checkUnreads() {
-  const unreads = getUnreadMessages();
-
-  ipc.send('unread', unreads.length);
-  console.log(unreads.length, unreads);
-
-  const startUp = !seenMessages;
-  if (startUp) {
-    seenMessages = new WeakMap();
-  }
-
-  unreads
-    .filter(message => !seenMessages.has(message.element))
-    .forEach((message) => {
-      // do not show the same notification every time on start up
-      if (!startUp) {
-        sendNotification(message);
-      }
-      // mark message as seen
-      seenMessages.set(message.element, true);
-    });
-
-  setTimeout(checkUnreads, 2000);
-}
 
 document.addEventListener('DOMContentLoaded', () => {
   checkUnreads();
