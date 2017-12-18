@@ -14,6 +14,23 @@ body {
       'Segoe UI Symbol' !important;
   text-rendering: optimizeLegibility !important;
   font-feature-settings: 'liga', 'clig', 'kern';
+  /* Do not scroll whole body */
+  overflow: hidden !important;
+}
+
+/* Scroll only content, without topbar */
+.tNsA5e-nUpftc.nUpftc.mP {
+  overflow-y: scroll;
+}
+
+/* Top margin for content (don't hide under teh topbar) */
+#Nr {
+  margin-top: 40px;
+}
+
+/* Application top padding */
+.cM {
+  padding-top: 0 !important;
 }
 
 /* Bind the topbar as the window's draggable region */
@@ -73,11 +90,6 @@ body {
 .hn::before {
   padding-left: 76px;
   height: 40px !important;
-}
-
-/* Application top padding */
-.cM {
-  padding-top: 40px !important;
 }
 
 /* Folder title in topbar */
