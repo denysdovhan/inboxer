@@ -58,6 +58,7 @@ function createMainWindow() {
     minWidth: 890,
     minHeight: 400,
     alwaysOnTop: config.get('alwaysOnTop'),
+    backgroundColor: '#f2f2f2',
     icon: path.join(__dirname, 'Logo.png'),
     titleBarStyle: 'hidden-inset',
     webPreferences: {
@@ -71,6 +72,12 @@ function createMainWindow() {
   }
 
   win.loadURL(mainURL);
+
+  // Show window after loading the DOM
+  // Docs: https://electronjs.org/docs/api/browser-window#showing-window-gracefully
+  win.once('ready-to-show', () => {
+    win.show();
+  });
 
   win.on('close', (e) => {
     if (!isQuitting) {
