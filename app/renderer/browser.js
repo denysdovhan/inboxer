@@ -1,6 +1,6 @@
 const { ipcRenderer: ipc } = require('electron');
 const checkUnreads = require('./unreads');
-const { $, $$ } = require('./utils');
+const { $, $$, renderOverlayIcon } = require('./utils');
 
 ipc.on('toggle-sidebar', () => $('.aO.AK.ew').click());
 
@@ -25,6 +25,10 @@ ipc.on('go-to-search', () => $('.gc.sp.g-lW').click());
 
 ipc.on('sign-out', () => $('#gb_71').click());
 ipc.on('add-account', () => $('.gb_Fa.gb_Nf.gb_Ee.gb_Eb').click());
+
+ipc.on('render-overlay-icon', (event, unreadsCount) => {
+  ipc.send('update-overlay-icon', renderOverlayIcon(unreadsCount).toDataURL(), unreadsCount.toString());
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   checkUnreads();

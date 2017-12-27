@@ -3,7 +3,16 @@ const {
 } = require('./utils');
 const { ipcRenderer: ipc } = require('electron');
 
-let seenMessages;
+const seenMessages = new Map();
+
+function keyByMessage({ subject, sender, avatar }) {
+  try {
+    return JSON.stringify({ subject, sender, avatar });
+  } catch (error) {
+    console.error(error); // eslint-disable-line
+    return undefined;
+  }
+}
 
 function extractSubject(el) {
   return ($('.lt', el) || $('.qG span', el)).textContent;
@@ -40,37 +49,38 @@ function getUnreadMessages() {
     return [];
   }
 
-  return Array.from($$('.ss')).map((message) => {
-    const ancestorEl = ancestor(message, '.jS');
+  return Array
+    .from($$('.ss'))
+    .map((message) => {
+      const ancestorEl = ancestor(message, '.jS');
 
-    if (ancestorEl.classList.contains('full-cluster-item') || $('.itemIconMarkedDone', ancestorEl)) {
-      return null;
-    }
+      if (ancestor(ancestorEl, '.full-cluster-item')) {
+        return null;
+      }
 
-    return {
-      element: ancestorEl,
-      subject: extractSubject(ancestorEl),
-      sender: extractSender(ancestorEl, message),
-      avatar: extractAvatar(ancestorEl, message),
-    };
-  });
+      return {
+        element: ancestorEl,
+        subject: extractSubject(ancestorEl),
+        sender: extractSender(ancestorEl, message),
+        avatar: extractAvatar(ancestorEl, message),
+      };
+    })
+    .filter(Boolean);
 }
 
 function checkUnreads(period = 2000) {
   const unreads = getUnreadMessages();
 
-  ipc.send('unread', unreads.length);
+  ipc.send('update-unreads-count', unreads.length);
 
-  const startingUp = !seenMessages;
-  if (startingUp) {
-    seenMessages = new WeakMap();
-  }
+  const startingUp = seenMessages.size === 0;
 
   unreads
-    .filter(message => !seenMessages.has(message.element))
-    .forEach(({
-      element, subject, sender, avatar,
-    }) => {
+    .filter(message => !seenMessages.has(keyByMessage(message)))
+    .forEach((message) => {
+      const {
+        element, subject, sender, avatar,
+      } = message;
       // do not show the same notification every time on start up
       if (startingUp) {
         sendNotification({
@@ -82,7 +92,7 @@ function checkUnreads(period = 2000) {
         });
       }
       // mark message as seen
-      seenMessages.set(element, true);
+      seenMessages.set(keyByMessage(message), true);
     });
 
   setTimeout(checkUnreads, period);

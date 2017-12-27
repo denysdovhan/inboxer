@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const {
-  app, BrowserWindow, Menu, shell, ipcMain,
+  app, BrowserWindow, Menu, shell, ipcMain, nativeImage,
 } = require('electron');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
@@ -18,8 +18,13 @@ require('electron-context-menu')();
 
 const mainURL = 'https://inbox.google.com/';
 
+const isDarwin = process.platform === 'darwin';
+const isLinux = process.platform === 'linux';
+const isWindows = process.platform === 'win32';
+
 let mainWindow;
 let isQuitting = false;
+let prevUnreadCount = 0;
 
 const isRunning = app.makeSingleInstance(() => {
   if (mainWindow) {
@@ -67,7 +72,7 @@ function createMainWindow() {
     },
   });
 
-  if (process.platform === 'darwin') {
+  if (isDarwin) {
     win.setSheetOffset(40);
   }
 
@@ -82,7 +87,13 @@ function createMainWindow() {
   win.on('close', (e) => {
     if (!isQuitting) {
       e.preventDefault();
-      app.hide();
+
+      if (isDarwin) {
+        app.hide();
+      } else {
+        // win.hide();
+        app.quit();
+      }
     }
   });
 
@@ -95,7 +106,7 @@ app.on('ready', () => {
 
   analytics.init();
 
-  if (!isDev && !process.platform !== 'linux') {
+  if (!isDev && !isLinux) {
     autoUpdater.logger = log;
     autoUpdater.logger.transports.file.level = 'info';
     autoUpdater.checkForUpdatesAndNotify();
@@ -105,8 +116,6 @@ app.on('ready', () => {
 
   webContents.on('dom-ready', () => {
     webContents.insertCSS(fs.readFileSync(path.join(__dirname, '../renderer/browser.css'), 'utf8'));
-
-    mainWindow.show();
   });
 
   webContents.on('will-navigate', (e, url) => {
@@ -141,6 +150,35 @@ app.on('before-quit', () => {
   }
 });
 
-ipcMain.on('unread', (e, unreadCount) => {
-  app.setBadgeCount(unreadCount);
+ipcMain.on('update-unreads-count', (e, unreadCount) => {
+  if (isDarwin || isLinux) {
+    app.setBadgeCount(config.get('showUnreadBadge') ? unreadCount : 0);
+    if (isDarwin && config.get('bounceDockIcon') && prevUnreadCount !== unreadCount) {
+      app.dock.bounce('informational');
+      prevUnreadCount = unreadCount;
+    }
+  }
+
+  if ((isLinux || isWindows) && config.get('showUnreadBadge')) {
+    // TODO: create tray
+    // tray.setBadge(messageCount);
+  }
+
+  if (isWindows) {
+    if (config.get('showUnreadBadge')) {
+      if (unreadCount === 0) {
+        mainWindow.setOverlayIcon(null, '');
+      }
+      // Delegate drawing of overlay icon to renderer process
+      mainWindow.webContents.send('render-overlay-icon', unreadCount);
+    }
+
+    if (config.get('flashWindowOnMessage')) {
+      mainWindow.flashFrame(unreadCount !== 0);
+    }
+  }
+});
+
+ipcMain.on('update-overlay-icon', (e, image, count) => {
+  mainWindow.setOverlayIcon(nativeImage.createFromDataURL(image), count);
 });

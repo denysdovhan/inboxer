@@ -29,9 +29,35 @@ const template = [
         type: 'separator',
       },
       {
+        label: 'Show Unread Badge',
+        type: 'checkbox',
+        checked: config.get('showUnreadBadge'),
+        click(menuItem) {
+          config.set('showUnreadBadge', menuItem.checked);
+        },
+      },
+      {
+        label: 'Bounce Dock on Notification',
+        type: 'checkbox',
+        checked: config.get('bounceDockIcon'),
+        visible: process.platform === 'darwin',
+        click(menuItem) {
+          config.set('bounceDockIcon', menuItem.checked);
+        },
+      },
+      {
+        label: 'Flash Window on Message',
+        type: 'checkbox',
+        checked: config.get('flashWindowOnMessage'),
+        visible: process.platform === 'win32',
+        click(menuItem) {
+          config.set('flashWindowOnMessage', menuItem.checked);
+        },
+      },
+      {
         label: 'Preferences…',
         accelerator: 'Cmd+,',
-        click(menuItems, focusedWindow) {
+        click(menuItem, focusedWindow) {
           sendAction(focusedWindow, 'show-preferences');
         },
       },

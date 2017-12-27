@@ -7,5 +7,8 @@ module.exports = new ElectronStore({
       height: 600,
     },
     alwaysOnTop: false,
+    showUnreadBadge: true,
+    bounceDockIcon: false,
+    flashWindowOnMessage: false,
   },
 });
