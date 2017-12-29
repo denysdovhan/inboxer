@@ -6,8 +6,8 @@ const isWindows = process.platform === 'win32';
 
 function sendAction(win, action) {
   analytics.track(action);
+  if (isDarwin) win.restore();
   win.webContents.send(action);
-  win.restore();
 }
 
 // @FIXME: Shift keybindings do not work.

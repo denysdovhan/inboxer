@@ -2,12 +2,12 @@ const path = require('path');
 const { app, Tray, Menu } = require('electron');
 const { isDarwin, sendAction } = require('./utils');
 
-const iconTrayPath = path.join(__dirname, '..', 'static/IconTray.png');
-const iconTrayUnreadPath = path.join(__dirname, '..', 'static/IconTrayUnread.png');
+const iconTrayFile = 'IconTray.png';
+const iconTrayUnreadFile = 'IconTrayUnread.png';
 
 let tray = null;
 
-const contextMenu = focusedWindow => ([
+const contextMenu = focusedWindow => [
   {
     label: 'Go to Inbox',
     click() {
@@ -26,28 +26,23 @@ const contextMenu = focusedWindow => ([
       sendAction(focusedWindow, 'go-to-done');
     },
   },
-  {
-    type: 'separator',
-  },
+  { type: 'separator' },
   {
     label: 'Sign Out',
     click() {
       sendAction(focusedWindow, 'sign-out');
     },
   },
-  {
-    type: 'separator',
-  },
-  {
-    role: 'quit',
-  },
-]);
+  { type: 'separator' },
+  { role: 'quit' },
+];
 
 function create(win) {
-  // if (isDarwin || tray) return;
-  if (tray) return;
+  if (isDarwin || tray) return;
 
-  tray = new Tray(iconTrayPath);
+  const iconPath = path.join(__dirname, '..', `static/${iconTrayFile}`);
+
+  tray = new Tray(iconPath);
   tray.setToolTip(app.getName());
   tray.setContextMenu(Menu.buildFromTemplate(contextMenu(win)));
 
@@ -57,7 +52,8 @@ function create(win) {
 function setBadge(shouldDisplayUnread) {
   if (isDarwin || !tray) return;
 
-  tray.setImage(shouldDisplayUnread ? iconTrayUnreadPath : iconTrayPath);
+  const iconPath = path.join(__dirname, '..', `static/${shouldDisplayUnread ? iconTrayFile : iconTrayUnreadFile}`);
+  tray.setImage(iconPath);
 }
 
 module.exports = {

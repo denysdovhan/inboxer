@@ -27,7 +27,11 @@ ipc.on('sign-out', () => $('#gb_71').click());
 ipc.on('add-account', () => $('.gb_Fa.gb_Nf.gb_Ee.gb_Eb').click());
 
 ipc.on('render-overlay-icon', (event, unreadsCount) => {
-  ipc.send('update-overlay-icon', renderOverlayIcon(unreadsCount).toDataURL(), unreadsCount.toString());
+  ipc.send(
+    'update-overlay-icon',
+    renderOverlayIcon(unreadsCount).toDataURL(),
+    unreadsCount.toString(),
+  );
 });
 
 document.addEventListener('DOMContentLoaded', () => {

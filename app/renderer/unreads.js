@@ -49,8 +49,7 @@ function getUnreadMessages() {
     return [];
   }
 
-  return Array
-    .from($$('.ss'))
+  return Array.from($$('.ss'))
     .map((message) => {
       const ancestorEl = ancestor(message, '.jS');
 
@@ -75,14 +74,12 @@ function checkUnreads(period = 2000) {
 
   const startingUp = seenMessages.size === 0;
 
-  unreads
-    .filter(message => !seenMessages.has(keyByMessage(message)))
-    .forEach((message) => {
-      const {
-        element, subject, sender, avatar,
-      } = message;
-      // do not show the same notification every time on start up
-      // if (!startingUp) {
+  unreads.filter(message => !seenMessages.has(keyByMessage(message))).forEach((message) => {
+    const {
+      element, subject, sender, avatar,
+    } = message;
+    // do not show the same notification every time on start up
+    if (!startingUp) {
       sendNotification({
         title: sender,
         body: subject,
@@ -90,10 +87,10 @@ function checkUnreads(period = 2000) {
       }).addEventListener('click', () => {
         sendClick(element);
       });
-      // }
-      // mark message as seen
-      seenMessages.set(keyByMessage(message), true);
-    });
+    }
+    // mark message as seen
+    seenMessages.set(keyByMessage(message), true);
+  });
 
   setTimeout(checkUnreads, period);
 }
