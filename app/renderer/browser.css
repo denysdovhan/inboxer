@@ -88,8 +88,17 @@ body {
 /* Topbar height */
 .hn,
 .hn::before {
-  padding-left: 76px;
   height: 40px !important;
+}
+
+/* Traffic lights on macOS */
+.platform-darwin .hn {
+  padding-left: 76px;
+}
+
+.platform-win32 .hn::before {
+  /* 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28) */
+  box-shadow: 0 1px 4px rgba(0,0,0,.14);
 }
 
 /* Folder title in topbar */
@@ -143,6 +152,18 @@ body {
 /* Search dropdown position */
 .ne.r9 {
   padding-top: 40px;
+}
+
+.platform-win32 .hn.bB {
+  background: #ffffff;
+}
+.platform-win32 .sc.qW,
+.platform-win32 .qz,
+.platform-win32, .qz:hover {
+  background-color: #f2f2f2;
+}
+.platform-win32 .bB .at::before {
+  box-shadow: inset -24px 0 12px -12px #ffffff;
 }
 
 /* Pin Toggle */
@@ -283,4 +304,10 @@ body {
 /* @TODO: make it available in separate window */
 .oCKk2 {
   display: none !important;
+}
+
+/* Make shadows of the message items look more native on Windows  */
+.platform-win32 .aa::before,
+.platform-win32 .an::before {
+  box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0,0,0,.12);
 }

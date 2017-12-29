@@ -31,6 +31,8 @@ ipc.on('render-overlay-icon', (event, unreadsCount) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add(`platform-${process.platform}`);
+
   checkUnreads();
 
   // Change application title on login page
