@@ -1,23 +1,12 @@
 const { app, shell, Menu } = require('electron');
 const pkg = require('../../package');
+const {
+  isDarwin, isWindows, sendAction, sendKeybinding,
+} = require('./utils');
 const config = require('./config');
 const report = require('./report');
-const analytics = require('./analytics');
-
-function sendAction(win, action) {
-  analytics.track(action);
-  win.webContents.send(action);
-}
-
-function sendKeybinding(win, keyCode) {
-  win.webContents.sendInputEvent({ type: 'keyDown', keyCode });
-  win.webContents.sendInputEvent({ type: 'char', keyCode });
-  win.webContents.sendInputEvent({ type: 'keyUp', keyCode });
-}
 
 // @TODO: switch accouts
-// @FIXME: Shift keybindings do not work.
-// https://stackoverflow.com/q/47378160/5508862
 const template = [
   {
     label: app.getName(),
@@ -40,7 +29,7 @@ const template = [
         label: 'Bounce Dock on Notification',
         type: 'checkbox',
         checked: config.get('bounceDockIcon'),
-        visible: process.platform === 'darwin',
+        visible: isDarwin,
         click(menuItem) {
           config.set('bounceDockIcon', menuItem.checked);
         },
@@ -49,9 +38,20 @@ const template = [
         label: 'Flash Window on Message',
         type: 'checkbox',
         checked: config.get('flashWindowOnMessage'),
-        visible: process.platform === 'win32',
+        visible: isWindows,
         click(menuItem) {
           config.set('flashWindowOnMessage', menuItem.checked);
+        },
+      },
+      {
+        label: 'Auto Hide Menu Bar',
+        type: 'checkbox',
+        checked: config.get('autoHideMenuBar'),
+        visible: !isDarwin,
+        click(menuItem, focusedWindow) {
+          config.set('autoHideMenuBar', !menuItem.checked);
+          focusedWindow.setAutoHideMenuBar(menuItem.checked);
+          focusedWindow.setMenuBarVisibility(!menuItem.checked);
         },
       },
       {
@@ -459,7 +459,7 @@ const template = [
       {
         label: 'Toggle Developer Tools',
         type: 'checkbox',
-        accelerator: process.platform === 'darwin' ? 'Option+Cmd+I' : 'Ctrl+Shift+I',
+        accelerator: isDarwin ? 'Option+Cmd+I' : 'Ctrl+Shift+I',
         click(item, focusedWindow) {
           focusedWindow.toggleDevTools();
         },

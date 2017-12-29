@@ -7,8 +7,10 @@ const log = require('electron-log');
 const isDev = require('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
 const minimatch = require('minimatch-all');
+const { isDarwin, isLinux, isWindows } = require('./utils');
 const config = require('./config');
 const appMenu = require('./menu');
+const appTray = require('./tray');
 const analytics = require('./analytics');
 
 app.setAppUserModelId('com.denysdovhan.inboxer');
@@ -17,10 +19,6 @@ require('electron-dl')();
 require('electron-context-menu')();
 
 const mainURL = 'https://inbox.google.com/';
-
-const isDarwin = process.platform === 'darwin';
-const isLinux = process.platform === 'linux';
-const isWindows = process.platform === 'win32';
 
 let mainWindow;
 let isQuitting = false;
@@ -55,6 +53,7 @@ function createMainWindow() {
   const windowState = config.get('windowState');
 
   const win = new BrowserWindow({
+    show: false, // Hide application until your page has loaded
     title: app.getName(),
     x: windowState.x,
     y: windowState.y,
@@ -63,8 +62,9 @@ function createMainWindow() {
     minWidth: 890,
     minHeight: 400,
     alwaysOnTop: config.get('alwaysOnTop'),
+    autoHideMenuBar: config.get('autoHideMenuBar'),
     backgroundColor: '#f2f2f2',
-    icon: path.join(__dirname, 'Logo.png'),
+    icon: path.join(__dirname, '..', 'static/Icon.png'),
     titleBarStyle: 'hidden-inset',
     webPreferences: {
       preload: path.join(__dirname, '..', 'renderer', 'browser.js'),
@@ -91,8 +91,7 @@ function createMainWindow() {
       if (isDarwin) {
         app.hide();
       } else {
-        // win.hide();
-        app.quit();
+        win.hide();
       }
     }
   });
@@ -103,6 +102,7 @@ function createMainWindow() {
 app.on('ready', () => {
   Menu.setApplicationMenu(appMenu);
   mainWindow = createMainWindow();
+  appTray.create(mainWindow);
 
   analytics.init();
 
@@ -152,7 +152,7 @@ app.on('before-quit', () => {
 
 ipcMain.on('update-unreads-count', (e, unreadCount) => {
   if (isDarwin || isLinux) {
-    app.setBadgeCount(config.get('showUnreadBadge') ? unreadCount : 0);
+    app.setBadgeCount(config.get('showUnreadBadge') ? unreadCount : undefined);
     if (isDarwin && config.get('bounceDockIcon') && prevUnreadCount !== unreadCount) {
       app.dock.bounce('informational');
       prevUnreadCount = unreadCount;
@@ -160,8 +160,7 @@ ipcMain.on('update-unreads-count', (e, unreadCount) => {
   }
 
   if ((isLinux || isWindows) && config.get('showUnreadBadge')) {
-    // TODO: create tray
-    // tray.setBadge(messageCount);
+    appTray.setBadge(unreadCount);
   }
 
   if (isWindows) {

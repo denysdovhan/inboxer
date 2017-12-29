@@ -10,5 +10,6 @@ module.exports = new ElectronStore({
     showUnreadBadge: true,
     bounceDockIcon: false,
     flashWindowOnMessage: false,
+    autoHideMenuBar: true,
   },
 });

@@ -82,15 +82,15 @@ function checkUnreads(period = 2000) {
         element, subject, sender, avatar,
       } = message;
       // do not show the same notification every time on start up
-      if (startingUp) {
-        sendNotification({
-          title: sender,
-          body: subject,
-          icon: avatar,
-        }).addEventListener('click', () => {
-          sendClick(element);
-        });
-      }
+      // if (!startingUp) {
+      sendNotification({
+        title: sender,
+        body: subject,
+        icon: avatar,
+      }).addEventListener('click', () => {
+        sendClick(element);
+      });
+      // }
       // mark message as seen
       seenMessages.set(keyByMessage(message), true);
     });

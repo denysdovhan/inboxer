@@ -28,7 +28,7 @@
   "main": "app/main",
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
-    "start": "electron .",
+    "start": "electron app/main",
     "lint": "eslint app",
     "test": "npm-run-all lint dist",
     "pack": "electron-builder --dir",
