@@ -7,3 +7,7 @@ cache:
   - node_modules
 script:
 - npm test
+- npm run dist
+branches:
+  except:
+    - "/^v\\d+\\.\\d+\\.\\d+$/"
