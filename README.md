@@ -50,6 +50,10 @@ You can download the latest version on [Releases](https://github.com/denysdovhan
 
 \* — Notice, that the `AppImage` needs to be [made executable](http://discourse.appimage.org/t/how-to-make-an-appimage-executable/80) after download.
 
+### Windows
+
+[**Download**][download] the `.exe` file.
+
 ## Keyboard shortcuts
 
 Inboxer supports all Google Inbox keyboard shortcuts, system-specific keybindings and more. Additional keybindings are listed below:
