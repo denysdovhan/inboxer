@@ -30,13 +30,14 @@
     "postinstall": "electron-builder install-app-deps",
     "start": "electron app/main",
     "lint": "eslint app",
+    "lint:fix": "npm run lint -- --fix",
     "test": "npm-run-all lint dist",
     "pack": "electron-builder --dir",
     "dist": "npm-run-all dist:*",
     "dist:mac": "electron-builder --mac",
     "dist:linux": "electron-builder --linux",
     "dist:win": "electron-builder --win",
-    "format": "prettier-eslint --write **/*.js"
+    "format": "prettier-eslint --write app/**/*.js"
   },
   "devDependencies": {
     "electron": "^1.7.9",
@@ -44,6 +45,8 @@
     "eslint": "^4.11.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
     "npm-run-all": "^4.1.2",
     "prettier-eslint-cli": "^4.4.0"
   },
@@ -91,5 +94,8 @@
         "deb"
       ]
     }
+  },
+  "lint-staged": {
+    "app/**/*.js": ["lint", "format"]
   }
 }
