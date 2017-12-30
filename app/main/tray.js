@@ -9,6 +9,13 @@ let tray = null;
 
 const contextMenu = focusedWindow => [
   {
+    label: 'Open/Close',
+    click() {
+      return focusedWindow.isVisible() ? focusedWindow.hide() : focusedWindow.show();
+    },
+  },
+  { type: 'separator' },
+  {
     label: 'Go to Inbox',
     click() {
       sendAction(focusedWindow, 'go-to-inbox');
