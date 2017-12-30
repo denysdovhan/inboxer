@@ -98,6 +98,11 @@
         "AppImage",
         "deb"
       ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
     }
   },
   "lint-staged": {
