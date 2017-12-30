@@ -13,11 +13,11 @@
 
 > Unofficial, free and open-source Google Inbox Desktop App
 
-Inboxer — is an unofficial Google Inbox client for desktop platforms. It's built on top of Google Inbox web-version, has pleasant UI and supports useful keyboard shortcuts.
+Inboxer — is an unofficial Inbox by Gmail client for desktop platforms. It's built on top of Google Inbox web-version, has pleasant UI and supports useful keyboard shortcuts.
 
 ## Features
 
-* Familiar Google Inbox interface
+* Familiar Inbox by Gmail interface
 * Cross-platform (macOS/Linux/Windows)
 * Useful Keyboard shortcuts
 * Multiple accounts
@@ -56,7 +56,7 @@ You can download the latest version on [Releases](https://github.com/denysdovhan
 
 ## Keyboard shortcuts
 
-Inboxer supports all Google Inbox keyboard shortcuts, system-specific keybindings and more. Additional keybindings are listed below:
+Inboxer supports all Inbox by Gmail keyboard shortcuts, system-specific keybindings and more. Additional keybindings are listed below:
 
 | Description                  | Keys                  
 |------------------------------|---------
@@ -80,7 +80,7 @@ Inboxer supports all Google Inbox keyboard shortcuts, system-specific keybinding
 
 ## Disclaimer
 
-This code is in no way affiliated with, authorised, maintained, sponsored or endorsed by Google or any of its affiliates or subsidiaries. This is an independent and unofficial Google Inbox app. Use it at your own risk.
+This code is in no way affiliated with, authorised, maintained, sponsored or endorsed by Google or any of its affiliates or subsidiaries. This is an independent and unofficial Inbox by Gmail app. Use it at your own risk.
 
 ## End User License Agreement
 
