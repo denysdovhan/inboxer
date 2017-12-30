@@ -37,7 +37,10 @@
     "dist:mac": "electron-builder --mac",
     "dist:linux": "electron-builder --linux",
     "dist:win": "electron-builder --win",
-    "format": "prettier-eslint --write app/**/*.js"
+    "format": "prettier-eslint --write app/**/*.js",
+    "icon": "npm-run-all icon:*",
+    "icon:icns": "png2icns app/static/Icon@2x.png -o build/icon.icns",
+    "icon:ico": "png2icons app/static/Icon@2x.png build/icon -ico"
   },
   "devDependencies": {
     "electron": "^1.7.9",
@@ -48,6 +51,8 @@
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
     "npm-run-all": "^4.1.2",
+    "png2icns": "0.0.1",
+    "png2icons": "^0.9.1",
     "prettier-eslint-cli": "^4.4.0"
   },
   "dependencies": {
