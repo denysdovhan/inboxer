@@ -159,7 +159,7 @@ ipcMain.on('update-unreads-count', (e, unreadCount) => {
     }
   }
 
-  if ((isLinux || isWindows) && config.get('showUnreadBadge')) {
+  if ((isLinux || isWindows) && config.get('showUnreadBadge') && prevUnreadCount !== unreadCount) {
     appTray.setBadge(unreadCount);
   }
 

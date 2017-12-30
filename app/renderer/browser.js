@@ -35,7 +35,7 @@ ipc.on('render-overlay-icon', (event, unreadsCount) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.classList.add(`platform-${process.platform}`);
+  document.documentElement.classList.add(`platform-${process.platform}`);
 
   checkUnreads();
 
