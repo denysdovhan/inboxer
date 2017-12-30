@@ -1,6 +1,6 @@
 ![Inboxer](./media/app-sidebar-view.png)
 
-# <img src="media/icon.png" width="32px"> Inboxer
+# <img src="app/static/Icon.png" width="32px"> Inboxer
 
 [![Version][release-img]][release-url]
 [![Travis CI][travis-img]][travis-url]
@@ -16,12 +16,12 @@ Inboxer — is an unofficial Google Inbox client for desktop platforms. It's bui
 ## Features
 
 * Familiar Google Inbox interface
-* Cross-platform (macOS/Linux, Windows is planed)
+* Cross-platform (macOS/Linux/Windows)
 * Useful Keyboard shortcuts
 * Multiple accounts
 * Optional Always on Top
 * Auto-updates to the latest version
-* **TODO:** Desktop notifications
+* Desktop notifications
 * **TODO:** Dark theme
 * **TODO:** Custom text size
 * **TODO:** Ability to use as default mail client
