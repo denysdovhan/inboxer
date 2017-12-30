@@ -1,13 +1,15 @@
-![Inboxer](./media/app-sidebar-view.png)
-
-# <img src="app/static/Icon.png" width="32px"> Inboxer
-
-[![Version][release-img]][release-url]
-[![Travis CI][travis-img]][travis-url]
-![Platform][platform-img]
-[![Donate with card][donate-card-image]][donate-readme]
-[![Donate with Bitcoin][donate-btc-image]][donate-readme]
-[![Donate with Ethereum][donate-eth-image]][donate-readme]
+<div align="center">
+  <img src="app/static/Icon.png" width="128px">
+  <h1>Inboxer</h1>
+  <p>
+    <a href="https://github.com/denysdovhan/inboxer/releases"><img src="https://img.shields.io/github/release/denysdovhan/inboxer.svg?style=flat-square" alt="Version"></a>
+    <a href="https://travis-ci.org/denysdovhan/inboxer?branch=master"><img src="https://img.shields.io/travis/denysdovhan/inboxer.svg?style=flat-square" alt="Travis CI"></a>
+    <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Linux%20%7C%20Windows-lightgrey.svg?style=flat-square" alt="Platform">
+    <a href="https://www.liqpay.com/en/checkout/380951100392"><img src="https://img.shields.io/badge/donate-LiqPay-blue.svg?style=flat-square" alt="Donate with card"></a>
+    <a href="https://github.com/denysdovhan/inboxer#donate"><img src="https://img.shields.io/badge/donate-BTC-yellow.svg?style=flat-square" alt="Donate with Bitcoin"></a>
+    <a href="https://github.com/denysdovhan/inboxer#donate"><img src="https://img.shields.io/badge/donate-ETH-gray.svg?style=flat-square" alt="Donate with Ethereum"></a>
+  </p>
+</div>
 
 > Unofficial, free and open-source Google Inbox Desktop App
 
@@ -27,6 +29,10 @@ Inboxer — is an unofficial Google Inbox client for desktop platforms. It's bui
 * **TODO:** Ability to use as default mail client
 
 All feature requests and contributions are welcome!
+
+## Screenshot
+
+![Inboxer on Mac](./media/inboxer-mac.png)
 
 ## Installation
 
@@ -100,13 +106,5 @@ I would appreciate your support! _Thank you!_
 MIT © [Denys Dovhan](http://denysdovhan.com)
 
 <!-- References -->
-
-[release-url]: https://
-[release-img]: https://img.shields.io/github/release/denysdovhan/inboxer.svg?style=flat-square
-
-[travis-url]: https://travis-ci.org/denysdovhan/inboxer?branch=master
-[travis-img]: https://img.shields.io/travis/denysdovhan/inboxer.svg?style=flat-square
-
-[platform-img]: https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey.svg?style=flat-square
 
 [download]: https://github.com/denysdovhan/inboxer/releases/latest
