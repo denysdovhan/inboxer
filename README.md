@@ -13,7 +13,15 @@
 
 > Unofficial, free and open-source Google Inbox Desktop App
 
-Inboxer — is an unofficial Inbox by Gmail client for desktop platforms. It's built on top of Google Inbox web-version, has pleasant UI and supports useful keyboard shortcuts.
+Inboxer — is an unofficial Inbox by Gmail client for desktop platforms. It's built on top of Inbox by Gmail web-version, has pleasant UI and supports useful keyboard shortcuts.
+
+Inboxer is highly inspired by these projects:
+
+* [Caprine](https://github.com/terkelg/ramme) by [Sindre Sorhus](https://github.com/sindresorhus)
+* [Ramme](https://github.com/terkelg/ramme) by [Terkel Gjervig Nielsen](https://github.com/terkelg)
+* [Keep](https://github.com/andrepolischuk/keep) by [Andrey Polischuk](https://github.com/andrepolischuk)
+
+Check out these ones as great examples of Electron applications. All of them are under the MIT license.
 
 ## Features
 
@@ -36,9 +44,7 @@ All feature requests and contributions are welcome!
 
 ## Installation
 
-Inboxer works well on **macOS 10.9+**. Version for **Linux** is available, but may be unstable. **Windows** support is planed in nearest future.
-
-You can download the latest version on [Releases](https://github.com/denysdovhan/inboxer/releases) page or below.
+Inboxer works well on **macOS 10.9+**, **Linux** and **Windows 7+**. You can download the latest version on [Releases](https://github.com/denysdovhan/inboxer/releases) page or below.
 
 ### macOS
 
