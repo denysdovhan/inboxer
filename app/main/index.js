@@ -40,7 +40,7 @@ if (isRunning) {
 function allowedUrl(url) {
   const urls = [
     'https://accounts.google.com/@(u|AccountChooser|AddSession|ServiceLogin|CheckCookie|Logout){**/**,**}',
-    'https://accounts.google.com/signin/@(usernamerecovery|recovery|challenge){**/**,**}',
+    'https://accounts.google.com/signin/@(usernamerecovery|recovery|challenge|selectchallenge){**/**,**}',
     'http://www.google.*/accounts/Logout2**',
     'https://inbox.google.com{**/**,**}',
     'https://{accounts.youtube,inbox.google}.com/accounts/@(SetOSID|SetSID)**',
