@@ -17,7 +17,7 @@ Inboxer — is an unofficial Inbox by Gmail client for desktop platforms. It's b
 
 Inboxer is highly inspired by these projects:
 
-* [Caprine](https://github.com/terkelg/ramme) by [Sindre Sorhus](https://github.com/sindresorhus)
+* [Caprine](https://github.com/sindresorhus/caprine) by [Sindre Sorhus](https://github.com/sindresorhus)
 * [Ramme](https://github.com/terkelg/ramme) by [Terkel Gjervig Nielsen](https://github.com/terkelg)
 * [Keep](https://github.com/andrepolischuk/keep) by [Andrey Polischuk](https://github.com/andrepolischuk)
 
