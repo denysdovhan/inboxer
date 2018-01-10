@@ -48,9 +48,8 @@ Inboxer works well on **macOS 10.9+**, **Linux** and **Windows 7+**. You can dow
 
 ### macOS
 
-[**Download**][download] the `.dmg` file.
+[**Download**][download] the `.dmg` file or install via [Homebrew-Cask](https://caskroom.github.io/):
 
-Or use [Homebrew-Cask](https://caskroom.github.io/):
 ```
 $ brew cask install inboxer
 ```
