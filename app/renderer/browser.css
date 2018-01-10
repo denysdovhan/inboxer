@@ -197,10 +197,12 @@ body {
 .f1,
 #gb,
 .gb_Ef,
+.gb_Ff,
 .gb_Bf,
 .gb_Df,
 .gb_Df>.gb_R,
-.gb_Ef>.gb_R {
+.gb_Ef>.gb_R,
+.gb_Ff>.gb_R {
   height: 40px !important;
 }
 
