@@ -170,6 +170,10 @@ const viewItems = [
       sendAction(focusedWindow, 'toggle-sidebar');
     },
   },
+  { type: 'separator' },
+  {role: 'resetzoom'},
+  {role: 'zoomin'},
+  {role: 'zoomout'},
 ];
 
 const editItems = [
