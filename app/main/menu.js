@@ -171,9 +171,9 @@ const viewItems = [
     },
   },
   { type: 'separator' },
-  {role: 'resetzoom'},
-  {role: 'zoomin'},
-  {role: 'zoomout'},
+  { role: 'resetzoom' },
+  { role: 'zoomin' },
+  { role: 'zoomout' },
 ];
 
 const editItems = [
