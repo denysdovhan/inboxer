@@ -22,9 +22,9 @@ const contextMenu = focusedWindow => [
     },
   },
   {
-    label: 'Go to Shoozed',
+    label: 'Go to Snoozed',
     click() {
-      sendAction(focusedWindow, 'go-to-shoozed');
+      sendAction(focusedWindow, 'go-to-snoozed');
     },
   },
   {

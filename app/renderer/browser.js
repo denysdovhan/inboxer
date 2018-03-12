@@ -9,7 +9,7 @@ ipc.on('show-preferences', () => $('.oin9Fc.cQ.lN').click());
 // primary folder shortcuts
 
 ipc.on('go-to-inbox', () => $$('.pa .oin9Fc.cN')[0].click());
-ipc.on('go-to-shoozed', () => $$('.pa .oin9Fc.cN')[1].click());
+ipc.on('go-to-snoozed', () => $$('.pa .oin9Fc.cN')[1].click());
 ipc.on('go-to-done', () => $$('.pa .oin9Fc.cN')[2].click());
 
 // secondary folder shortcuts

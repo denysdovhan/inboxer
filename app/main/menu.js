@@ -101,7 +101,7 @@ const viewItems = [
     label: 'Go to Snoozed',
     accelerator: 'CmdOrCtrl+S',
     click(menuItem, focusedWindow) {
-      sendAction(focusedWindow, 'go-to-shoozed');
+      sendAction(focusedWindow, 'go-to-snoozed');
     },
   },
   {
