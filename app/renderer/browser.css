@@ -125,9 +125,32 @@ body {
   height: 26px !important;
 }
 
-/* Remove left margin when sidebar is opened */
+/* Remove left margin, make content wider when sidebar is opened */
 .M .bS {
   margin-left: 0 !important;
+}
+@media (max-width: 1632px) {
+  .M .bz {
+    margin-left: 272px;
+    margin-right: 50px !important;
+  }
+}
+@media (max-width: 1800px) {
+  .M .bz {
+    margin-left: 272px;
+  }
+}
+
+/* Make content wider when sidebar is closed */
+@media (max-width: 1260px) {
+  .bz:not(.M) {
+    width: 85%;
+  }
+}
+@media (max-width: 1800px) {
+  .bz:not(.M) {
+    width: 80%;
+  }
 }
 
 /* Search icon sizes and position */
