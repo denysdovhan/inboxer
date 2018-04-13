@@ -29,12 +29,16 @@ const isRunning = app.makeSingleInstance(() => {
     if (mainWindow.isMinimized()) {
       mainWindow.restore();
     }
+    if (!mainWindow.isVisible()) {
+      mainWindow.show();
+    }
     mainWindow.focus();
   }
 });
 
 if (isRunning) {
   app.quit();
+  process.exit();
 }
 
 function allowedUrl(url) {
