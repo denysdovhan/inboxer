@@ -227,13 +227,15 @@ body {
   padding-left: 0;
 }
 .gb_b.gb_R,
-.gb_bb.gbii {
+.gb_bb.gbii,
+.gb_db.gbii {
   height: 26px;
   width: 26px;
   margin-top: 1px;
 }
 .gb_ab.gbii,
-.gb_bb.gbii {
+.gb_bb.gbii,
+.gb_db.gbii {
   display: inline-block;
   height: 26px;
   width: 26px;
