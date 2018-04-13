@@ -1,3 +1,12 @@
+> ## 🙏🏻 This project needs your help! 🙏🏻
+>
+> Original author doesn't use Inbox by Gmail anymore, so this project is looking for a maintainer!
+>
+> A lot of people around the world use Inboxer every day.
+> Maintaining this project is a great experience and good item for your resume 😎
+>
+> Ready to help? Just [open an issue](https://github.com/denysdovhan/inboxer/issues/new)!
+
 <div align="center">
   <img src="app/static/Icon.png" width="128px">
   <h1>Inboxer</h1>
