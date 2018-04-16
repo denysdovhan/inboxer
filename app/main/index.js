@@ -165,15 +165,20 @@ ipcMain.on('update-unreads-count', (e, unreadCount) => {
 
   if ((isLinux || isWindows) && config.get('showUnreadBadge')) {
     appTray.setBadge(unreadCount);
+  } else if ((isLinux || isWindows)) {
+    appTray.setBadge(false);
   }
 
   if (isWindows) {
     if (config.get('showUnreadBadge')) {
       if (unreadCount === 0) {
         mainWindow.setOverlayIcon(null, '');
+      } else {
+        // Delegate drawing of overlay icon to renderer process
+        mainWindow.webContents.send('render-overlay-icon', unreadCount);
       }
-      // Delegate drawing of overlay icon to renderer process
-      mainWindow.webContents.send('render-overlay-icon', unreadCount);
+    } else {
+      mainWindow.setOverlayIcon(null, '');
     }
 
     if (config.get('flashWindowOnMessage')) {
