@@ -156,7 +156,11 @@ app.on('before-quit', () => {
 
 ipcMain.on('update-unreads-count', (e, unreadCount) => {
   if (isDarwin || isLinux) {
-    const isUpdated = config.get('showUnreadBadge') ? app.setBadgeCount(unreadCount) : false;
+    let isUpdated = config.get('showUnreadBadge') ? app.setBadgeCount(unreadCount) : false;
+    if (!config.get('showUnreadBadge')) {
+      app.setBadgeCount(0);
+      isUpdated = false;
+    }
     if (isDarwin && config.get('bounceDockIcon') && prevUnreadCount !== unreadCount && isUpdated) {
       app.dock.bounce('informational');
       prevUnreadCount = unreadCount;
