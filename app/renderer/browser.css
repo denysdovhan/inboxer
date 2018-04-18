@@ -14,18 +14,14 @@ body {
       'Segoe UI Symbol' !important;
   text-rendering: optimizeLegibility !important;
   font-feature-settings: 'liga', 'clig', 'kern';
-  /* Do not scroll whole body */
-  overflow: hidden !important;
-}
-
-/* Scroll only content, without topbar */
-.tNsA5e-nUpftc.nUpftc.mP {
-  overflow-y: scroll;
 }
 
 /* Top margin for content (don't hide under teh topbar) */
-#Nr {
-  margin-top: 40px;
+#Nr .c4 {
+  padding-top: 60px;
+}
+#Nr .a1 {
+  padding-top: 0 !important;
 }
 
 /* Application top padding */
@@ -89,6 +85,10 @@ body {
 .hn,
 .hn::before {
   height: 40px !important;
+}
+.f1 .gb_nb {
+  height: 40px !important;
+  margin-top: 2px;
 }
 
 /* Traffic lights on macOS */
