@@ -156,7 +156,11 @@ app.on('before-quit', () => {
 
 ipcMain.on('update-unreads-count', (e, unreadCount) => {
   if (isDarwin || isLinux) {
-    const isUpdated = config.get('showUnreadBadge') ? app.setBadgeCount(unreadCount) : false;
+    let isUpdated = config.get('showUnreadBadge') ? app.setBadgeCount(unreadCount) : false;
+    if (!config.get('showUnreadBadge')) {
+      app.setBadgeCount(0);
+      isUpdated = false;
+    }
     if (isDarwin && config.get('bounceDockIcon') && prevUnreadCount !== unreadCount && isUpdated) {
       app.dock.bounce('informational');
       prevUnreadCount = unreadCount;
@@ -165,15 +169,20 @@ ipcMain.on('update-unreads-count', (e, unreadCount) => {
 
   if ((isLinux || isWindows) && config.get('showUnreadBadge')) {
     appTray.setBadge(unreadCount);
+  } else if ((isLinux || isWindows)) {
+    appTray.setBadge(false);
   }
 
   if (isWindows) {
     if (config.get('showUnreadBadge')) {
       if (unreadCount === 0) {
         mainWindow.setOverlayIcon(null, '');
+      } else {
+        // Delegate drawing of overlay icon to renderer process
+        mainWindow.webContents.send('render-overlay-icon', unreadCount);
       }
-      // Delegate drawing of overlay icon to renderer process
-      mainWindow.webContents.send('render-overlay-icon', unreadCount);
+    } else {
+      mainWindow.setOverlayIcon(null, '');
     }
 
     if (config.get('flashWindowOnMessage')) {

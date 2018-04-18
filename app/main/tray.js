@@ -59,7 +59,7 @@ function create(win) {
 function setBadge(shouldDisplayUnread) {
   if (isDarwin || !tray) return;
 
-  const iconPath = path.join(__dirname, '..', `static/${shouldDisplayUnread ? iconTrayFile : iconTrayUnreadFile}`);
+  const iconPath = path.join(__dirname, '..', `static/${shouldDisplayUnread ? iconTrayUnreadFile : iconTrayFile}`);
   tray.setImage(iconPath);
 }
 
