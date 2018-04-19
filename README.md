@@ -1,12 +1,3 @@
-> ## 🙏🏻 This project needs your help! 🙏🏻
->
-> Original author doesn't use Inbox by Gmail anymore, so this project is looking for a maintainer!
->
-> A lot of people around the world use Inboxer every day.
-> Maintaining this project is a great experience and good item for your resume 😎
->
-> Ready to help? Just [open an issue](https://github.com/denysdovhan/inboxer/issues/new)!
-
 <div align="center">
   <img src="app/static/Icon.png" width="128px">
   <h1>Inboxer</h1>
@@ -77,7 +68,7 @@ $ brew cask install inboxer
 
 Inboxer supports all Inbox by Gmail keyboard shortcuts, system-specific keybindings and more. Additional keybindings are listed below:
 
-| Description                  | Keys                  
+| Description                  | Keys
 |------------------------------|---------
 | Preferences                  | <kbd>Cmd/Ctrl</kbd> <kbd>,</kbd>
 | Compose Message              | <kbd>Cmd/Ctrl</kbd> <kbd>N</kbd>
