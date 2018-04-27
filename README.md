@@ -45,6 +45,7 @@ All feature requests and contributions are welcome!
 ## Installation
 
 Inboxer works well on **macOS 10.9+**, **Linux** and **Windows 7+**. You can download the latest version on [Releases](https://github.com/denysdovhan/inboxer/releases) page or below.
+Inboxer is also available through the nix package manager (see [package in nix](https://nixos.org/nixos/packages.html#inboxer))
 
 ### macOS
 
