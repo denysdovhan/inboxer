@@ -51,7 +51,7 @@ function allowedUrl(url) {
     'https://www.google.com/a/**/acs',
     'https://**.okta.com/**',
     'https://google.*/accounts/**',
-    'https://www.google.**/accounts/signin/continue**', 
+    'https://www.google.**/accounts/signin/continue**',
   ];
 
   return minimatch(url, urls);
