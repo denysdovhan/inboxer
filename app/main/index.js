@@ -48,6 +48,10 @@ function allowedUrl(url) {
     'http://www.google.*/accounts/Logout2**',
     'https://inbox.google.com{**/**,**}',
     'https://{accounts.youtube,inbox.google}.com/accounts/@(SetOSID|SetSID)**',
+    'https://www.google.com/a/**/acs',
+    'https://**.okta.com/**',
+    'https://google.*/accounts/**',
+    'https://www.google.**/accounts/signin/continue**',
   ];
 
   return minimatch(url, urls);
