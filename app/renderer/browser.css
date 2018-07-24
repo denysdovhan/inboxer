@@ -1,19 +1,10 @@
 /* Add OS specific fonts */
 body {
-  font-family: -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      Roboto,
-      Oxygen-Sans,
-      Ubuntu,
-      Cantarell,
-      'Helvetica Neue',
-      sans-serif,
-      'Apple Color Emoji',
-      'Segoe UI Emoji',
-      'Segoe UI Symbol' !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !important;
   text-rendering: optimizeLegibility !important;
-  font-feature-settings: 'liga', 'clig', 'kern';
+  font-feature-settings: "liga", "clig", "kern";
 }
 
 /* Top margin for content (don't hide under teh topbar) */
@@ -84,7 +75,7 @@ body {
 /* Topbar height */
 .hn,
 .hn::before {
-  height: 40px !important;
+  height: 56px !important;
 }
 .f1 .gb_nb {
   height: 40px !important;
@@ -98,30 +89,35 @@ body {
 
 .platform-win32 .hn::before {
   /* 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28) */
-  box-shadow: 0 1px 4px rgba(0,0,0,.14);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.14);
 }
 
 /* Folder title in topbar */
 .c7 {
   font-size: 1.3em !important;
+  display: flex;
+  align-items: center;
 }
 
 /* Hamburger menu in topbar */
-.c7 .ew, .c7 .ew::before {
+.c7 .ew,
+.c7 .ew::before {
   background-size: 17px 17px;
-  height: 17px;
-  width: 17px;
+  display: flex;
+  align-items: center;
 }
 .aO {
   padding: 11.5px 19px !important;
 }
-.aO.ew img {
-  width: 17px;
-  height: 17px;
+
+.c7 .ew .aO.ew img {
+  width: 26px;
+  height: 26px;
 }
 
 /* Search bar height */
-.bS, .bS::before {
+.bS,
+.bS::before {
   height: 26px !important;
 }
 
@@ -182,7 +178,8 @@ body {
 }
 .platform-win32 .sc.qW,
 .platform-win32 .qz,
-.platform-win32, .qz:hover {
+.platform-win32,
+.qz:hover {
   background-color: #f2f2f2;
 }
 .platform-win32 .bB .at::before {
@@ -223,10 +220,10 @@ body {
 .gb_Ff,
 .gb_Bf,
 .gb_Df,
-.gb_Df>.gb_R,
-.gb_Ef>.gb_R,
-.gb_Ff>.gb_R,
-.gb_Mf>.gb_R {
+.gb_Df > .gb_R,
+.gb_Ef > .gb_R,
+.gb_Ff > .gb_R,
+.gb_Mf > .gb_R {
   height: 40px !important;
 }
 
@@ -337,5 +334,5 @@ body {
 /* Make shadows of the message items look more native on Windows  */
 .platform-win32 .aa::before,
 .platform-win32 .an::before {
-  box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0,0,0,.12);
+  box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0, 0, 0, 0.12);
 }
