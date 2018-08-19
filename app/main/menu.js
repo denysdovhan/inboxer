@@ -466,7 +466,7 @@ const otherTemplate = [
   },
   {
     label: 'Edit',
-    submenu: [...editItems, { type: 'separator' }, ...settingsItems],
+    submenu: [...editItems, ...settingsItems],
   },
   {
     label: 'List',
