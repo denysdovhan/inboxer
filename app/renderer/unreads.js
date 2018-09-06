@@ -68,18 +68,20 @@ function getUnreadMessages() {
 }
 
 function checkUnreads(period = 2000) {
+  if ( typeof checkUnreads.startingUp == 'undefined' ) {
+    checkUnreads.startingUp = true;
+  }
+
   const unreads = getUnreadMessages();
 
   ipc.send('update-unreads-count', unreads.length);
-
-  const startingUp = seenMessages.size === 0;
 
   unreads.filter(message => !seenMessages.has(keyByMessage(message))).forEach((message) => {
     const {
       element, subject, sender, avatar,
     } = message;
     // do not show the same notification every time on start up
-    if (!startingUp) {
+    if (!checkUnreads.startingUp) {
       sendNotification({
         title: sender,
         body: subject,
@@ -92,6 +94,9 @@ function checkUnreads(period = 2000) {
     // mark message as seen
     seenMessages.set(keyByMessage(message), true);
   });
+  if (checkUnreads.startingUp) {
+    checkUnreads.startingUp = false;
+  }
 
   setTimeout(checkUnreads, period);
 }
