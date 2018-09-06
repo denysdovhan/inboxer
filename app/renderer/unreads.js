@@ -7,7 +7,7 @@ const seenMessages = new Map();
 
 function keyByMessage({ subject, sender, avatar }) {
   try {
-    return JSON.stringify({ subject, sender, avatar });
+    return JSON.stringify({ subject, sender });
   } catch (error) {
     console.error(error); // eslint-disable-line
     return undefined;
