@@ -85,6 +85,7 @@ function checkUnreads(period = 2000) {
         body: subject,
         icon: avatar,
       }).addEventListener('click', () => {
+        ipc.send('show-window', true);
         sendClick(element);
       });
     }
