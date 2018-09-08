@@ -56,6 +56,7 @@
     "prettier-eslint-cli": "^4.4.0"
   },
   "dependencies": {
+    "asar": "^0.14.3",
     "electron-context-menu": "^0.9.1",
     "electron-dl": "^1.10.0",
     "electron-is-dev": "^0.3.0",

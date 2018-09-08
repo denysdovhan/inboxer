@@ -290,7 +290,7 @@ body {
 /* 'Change' in popup's avatar */
 .gb_lb,
 .gb_mb {
-  width: 67px !important;
+  width: 96px !important;
 }
 
 /* Avatar in topbar goes up */
@@ -338,4 +338,13 @@ body {
 .platform-win32 .aa::before,
 .platform-win32 .an::before {
   box-shadow: 0 -1px 0 #e0e0e0, 0 0 2px rgba(0,0,0,.12);
+}
+
+.gb_Dc {
+  height: 80% !important
+}
+
+a.gb_b.gb_eb.gb_R::before {
+  right: -8px;
+  bottom: -8px;
 }
