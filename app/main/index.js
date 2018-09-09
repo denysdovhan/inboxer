@@ -52,6 +52,7 @@ function allowedUrl(url) {
     'https://**.okta.com/**',
     'https://google.*/accounts/**',
     'https://www.google.**/accounts/signin/continue**',
+    path.join('file://', __dirname, '../renderer/preferences**'),
   ];
 
   return minimatch(url, urls);
@@ -112,7 +113,7 @@ app.on('ready', () => {
   mainWindow = createMainWindow();
   appTray.create(mainWindow);
 
-  analytics.init();
+  if (config.get('sendAnalytics')) analytics.init();
 
   if (!isDev && !isLinux) {
     autoUpdater.logger = log;
@@ -127,7 +128,7 @@ app.on('ready', () => {
   });
 
   webContents.on('will-navigate', (e, url) => {
-    analytics.track('will-navigate');
+    if (config.get('sendAnalytics')) analytics.track('will-navigate');
     if (!allowedUrl(url)) {
       e.preventDefault();
       shell.openExternal(url);
@@ -135,7 +136,7 @@ app.on('ready', () => {
   });
 
   webContents.on('new-window', (e, url) => {
-    analytics.track('new-window');
+    if (config.get('sendAnalytics')) analytics.track('new-window');
     e.preventDefault();
     if (allowedUrl(url)) {
       webContents.loadURL(url);
@@ -150,7 +151,7 @@ app.on('activate', () => {
 });
 
 app.on('before-quit', () => {
-  analytics.track('quit');
+  if (config.get('sendAnalytics')) analytics.track('quit');
   isQuitting = true;
 
   if (!mainWindow.isFullScreen()) {

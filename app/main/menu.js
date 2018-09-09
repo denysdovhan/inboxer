@@ -8,6 +8,7 @@ const {
 } = require('./utils');
 const config = require('./config');
 const report = require('./report');
+const preferences = require('./preferences');
 
 const settingsItems = [
   {
@@ -47,11 +48,23 @@ const settingsItems = [
       focusedWindow.setMenuBarVisibility(!menuItem.checked);
     },
   },
+
+  // NOTE: Account Preferences instead of Preferences (for Inboxer Preferences)
+
   {
-    label: 'Preferences…',
+    label: 'Account Preferences',
     accelerator: 'Cmd+,',
     click(menuItem, focusedWindow) {
       sendAction(focusedWindow, 'show-preferences');
+    },
+  },
+
+  // TODO: Create Preferences window
+
+  {
+    label: 'Preferences',
+    click() {
+      preferences.showPreferencesWindow();
     },
   },
 ];
