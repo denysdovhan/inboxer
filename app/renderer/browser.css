@@ -348,3 +348,27 @@ a.gb_b.gb_eb.gb_R::before {
   right: -8px;
   bottom: -8px;
 }
+
+/* Tooltip to display link contents */
+/* <div class="tE"> contains message view area (right side of window) */
+div.tE a[href]::after {
+    content: attr(href);
+    position: absolute;
+    display: table;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%) translateY(-10%);
+    background: rgba(0,0,0,0.7);
+    text-align: center;
+    color: #fff;
+    font: normal small sans-serif;
+    border-radius: 5px;
+    pointer-events: none;
+    padding: 4px 8px;
+    z-index:99;
+    opacity:0;
+}
+
+div.tE a[href]:hover::after {
+   opacity:1
+}
