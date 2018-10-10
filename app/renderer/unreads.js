@@ -42,13 +42,6 @@ function extractSender(el, message) {
 }
 
 function getUnreadMessages() {
-  // not inside the inbox
-  const isInbox = $('.hA [title=Inbox]');
-
-  if (!isInbox) {
-    return [];
-  }
-
   return Array.from($$('.ss'))
     .map((message) => {
       const ancestorEl = ancestor(message, '.jS');
@@ -68,6 +61,13 @@ function getUnreadMessages() {
 }
 
 function checkUnreads(period = 2000) {
+  // skip if we're not inside the inbox
+  const isInbox = $('.hA [title=Inbox]');
+  if (!isInbox) {
+    setTimeout(checkUnreads, period);
+    return;
+  }
+
   if ( typeof checkUnreads.startingUp == 'undefined' ) {
     checkUnreads.startingUp = true;
   }
