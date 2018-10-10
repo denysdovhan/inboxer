@@ -68,7 +68,7 @@ function checkUnreads(period = 2000) {
     return;
   }
 
-  if ( typeof checkUnreads.startingUp == 'undefined' ) {
+  if (typeof checkUnreads.startingUp === 'undefined') {
     checkUnreads.startingUp = true;
   }
 
@@ -77,9 +77,9 @@ function checkUnreads(period = 2000) {
   ipc.send('update-unreads-count', unreads.length);
 
   // mark all previously seen messages as false
-  for(const key of seenMessages.keys()) {
-    seenMessages.set(key, false);
-  }
+  seenMessages.forEach((value, key, map) => {
+    map.set(key, false);
+  });
 
   unreads.forEach((message) => {
     const {
@@ -102,11 +102,11 @@ function checkUnreads(period = 2000) {
   });
 
   // clean up old entries in seenMessages
-  for(const key of seenMessages.keys()) {
-    if (seenMessages.get(key) == false) {
-      seenMessages.delete(key);
+  seenMessages.forEach((value, key, map) => {
+    if (value === false) {
+      map.delete(key);
     }
-  }
+  });
 
   if (checkUnreads.startingUp) {
     checkUnreads.startingUp = false;
