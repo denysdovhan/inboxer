@@ -199,3 +199,7 @@ ipcMain.on('update-unreads-count', (e, unreadCount) => {
 ipcMain.on('update-overlay-icon', (e, image, count) => {
   mainWindow.setOverlayIcon(nativeImage.createFromDataURL(image), count);
 });
+
+ipcMain.on('show-window', () => {
+  mainWindow.show();
+});
