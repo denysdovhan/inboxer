@@ -76,12 +76,18 @@ function checkUnreads(period = 2000) {
 
   ipc.send('update-unreads-count', unreads.length);
 
-  unreads.filter(message => !seenMessages.has(keyByMessage(message))).forEach((message) => {
+  // mark all previously seen messages as false
+  for(const key of seenMessages.keys()) {
+    seenMessages.set(key, false);
+  }
+
+  unreads.forEach((message) => {
     const {
       element, subject, sender, avatar,
     } = message;
+    const key = keyByMessage(message);
     // do not show the same notification every time on start up
-    if (!checkUnreads.startingUp) {
+    if (!checkUnreads.startingUp && !seenMessages.has(key)) {
       sendNotification({
         title: sender,
         body: subject,
@@ -92,8 +98,16 @@ function checkUnreads(period = 2000) {
       });
     }
     // mark message as seen
-    seenMessages.set(keyByMessage(message), true);
+    seenMessages.set(key, true);
   });
+
+  // clean up old entries in seenMessages
+  for(const key of seenMessages.keys()) {
+    if (seenMessages.get(key) == false) {
+      seenMessages.delete(key);
+    }
+  }
+
   if (checkUnreads.startingUp) {
     checkUnreads.startingUp = false;
   }
