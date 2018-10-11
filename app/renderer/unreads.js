@@ -5,9 +5,9 @@ const { ipcRenderer: ipc } = require('electron');
 
 const seenMessages = new Map();
 
-function keyByMessage({ subject, sender }) {
+function keyByMessage({ subject, sender, convlen }) {
   try {
-    return JSON.stringify({ subject, sender });
+    return JSON.stringify({ subject, sender, convlen });
   } catch (error) {
     console.error(error); // eslint-disable-line
     return undefined;
@@ -41,6 +41,14 @@ function extractSender(el, message) {
   return $('[email]', el).textContent;
 }
 
+function extractConversationLength(el) {
+    const len_span = $('span.qi', el);
+    if (len_span) {
+	return len_span.textContent;
+    }
+    return null;
+}
+
 function getUnreadMessages() {
   return Array.from($$('.ss'))
     .map((message) => {
@@ -55,6 +63,7 @@ function getUnreadMessages() {
         subject: extractSubject(ancestorEl),
         sender: extractSender(ancestorEl, message),
         avatar: extractAvatar(ancestorEl, message),
+        convlen: extractConversationLength(ancestorEl)
       };
     })
     .filter(Boolean);
@@ -83,7 +92,7 @@ function checkUnreads(period = 2000) {
 
   unreads.forEach((message) => {
     const {
-      element, subject, sender, avatar,
+      element, subject, sender, avatar, convlen
     } = message;
     const key = keyByMessage(message);
     // do not show the same notification every time on start up
