@@ -3,6 +3,7 @@
 > As you know Google is going to take down Inbox service, so we want to keep this project alive.
 >
 > Help us to implement all Inboxer features with GMail service
+>
 > Ready to help? Just [open an issue](https://github.com/denysdovhan/inboxer/issues/new)!
 
 <div align="center">
