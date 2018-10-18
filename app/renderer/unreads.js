@@ -42,13 +42,6 @@ function extractSender(el, message) {
 }
 
 function getUnreadMessages() {
-  // not inside the inbox
-  const isInbox = $('.hA [title=Inbox]');
-
-  if (!isInbox) {
-    return [];
-  }
-
   return Array.from($$('.ss'))
     .map((message) => {
       const ancestorEl = ancestor(message, '.jS');
@@ -68,18 +61,33 @@ function getUnreadMessages() {
 }
 
 function checkUnreads(period = 2000) {
+  // skip if we're not inside the inbox
+  const isInbox = $('.hA [title=Inbox]');
+  if (!isInbox) {
+    setTimeout(checkUnreads, period);
+    return;
+  }
+
+  if (typeof checkUnreads.startingUp === 'undefined') {
+    checkUnreads.startingUp = true;
+  }
+
   const unreads = getUnreadMessages();
 
   ipc.send('update-unreads-count', unreads.length);
 
-  const startingUp = seenMessages.size === 0;
+  // mark all previously seen messages as false
+  seenMessages.forEach((value, key, map) => {
+    map.set(key, false);
+  });
 
-  unreads.filter(message => !seenMessages.has(keyByMessage(message))).forEach((message) => {
+  unreads.forEach((message) => {
     const {
       element, subject, sender, avatar,
     } = message;
+    const key = keyByMessage(message);
     // do not show the same notification every time on start up
-    if (!startingUp) {
+    if (!checkUnreads.startingUp && !seenMessages.has(key)) {
       sendNotification({
         title: sender,
         body: subject,
@@ -90,8 +98,19 @@ function checkUnreads(period = 2000) {
       });
     }
     // mark message as seen
-    seenMessages.set(keyByMessage(message), true);
+    seenMessages.set(key, true);
   });
+
+  // clean up old entries in seenMessages
+  seenMessages.forEach((value, key, map) => {
+    if (value === false) {
+      map.delete(key);
+    }
+  });
+
+  if (checkUnreads.startingUp) {
+    checkUnreads.startingUp = false;
+  }
 
   setTimeout(checkUnreads, period);
 }
