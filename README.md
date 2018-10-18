@@ -1,9 +1,8 @@
 > ## 🙏🏻 This project needs your help! 🙏🏻
 >
-> I don't have enough time to maintain this project, so this project is looking for a maintainer!
+> As you know Google is going to take down Inbox service, so we want to keep this project alive.
 >
-> A lot of people around the world use Inboxer every day.
-> Maintaining this project is a great experience and good item for your resume 😎
+> Help us to implement all Inboxer features with GMail service
 >
 > Ready to help? Just [open an issue](https://github.com/denysdovhan/inboxer/issues/new)!
 
