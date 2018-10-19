@@ -42,11 +42,11 @@ function extractSender(el, message) {
 }
 
 function extractConversationLength(el) {
-    const len_span = $('span.qi', el);
-    if (len_span) {
-	return len_span.textContent;
-    }
-    return null;
+  const lenSpan = $('span.qi', el);
+  if (lenSpan) {
+    return lenSpan.textContent;
+  }
+  return null;
 }
 
 function getUnreadMessages() {
@@ -63,7 +63,7 @@ function getUnreadMessages() {
         subject: extractSubject(ancestorEl),
         sender: extractSender(ancestorEl, message),
         avatar: extractAvatar(ancestorEl, message),
-        convlen: extractConversationLength(ancestorEl)
+        convlen: extractConversationLength(ancestorEl),
       };
     })
     .filter(Boolean);
@@ -92,7 +92,7 @@ function checkUnreads(period = 2000) {
 
   unreads.forEach((message) => {
     const {
-      element, subject, sender, avatar, convlen
+      element, subject, sender, avatar,
     } = message;
     const key = keyByMessage(message);
     // do not show the same notification every time on start up
