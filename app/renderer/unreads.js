@@ -5,9 +5,9 @@ const { ipcRenderer: ipc } = require('electron');
 
 const seenMessages = new Map();
 
-function keyByMessage({ subject, sender, convlen }) {
+function keyByMessage({ subject, sender, conversationLength }) {
   try {
-    return JSON.stringify({ subject, sender, convlen });
+    return JSON.stringify({ subject, sender, conversationLength });
   } catch (error) {
     console.error(error); // eslint-disable-line
     return undefined;
@@ -43,10 +43,7 @@ function extractSender(el, message) {
 
 function extractConversationLength(el) {
   const lenSpan = $('span.qi', el);
-  if (lenSpan) {
-    return lenSpan.textContent;
-  }
-  return null;
+  return (lenSpan) ? lenSpan.textContent : null;
 }
 
 function getUnreadMessages() {
@@ -63,7 +60,7 @@ function getUnreadMessages() {
         subject: extractSubject(ancestorEl),
         sender: extractSender(ancestorEl, message),
         avatar: extractAvatar(ancestorEl, message),
-        convlen: extractConversationLength(ancestorEl),
+        conversationLength: extractConversationLength(ancestorEl),
       };
     })
     .filter(Boolean);
