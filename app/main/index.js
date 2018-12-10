@@ -135,7 +135,7 @@ app.on('ready', () => {
   });
 });
 
-app.on('second-instance', (event, commandLine, workingDirectory) => {
+app.on('second-instance', () => {
   if (mainWindow) {
     if (mainWindow.isMinimized()) {
       mainWindow.restore();
