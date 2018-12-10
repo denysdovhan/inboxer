@@ -24,19 +24,8 @@ let mainWindow;
 let isQuitting = false;
 let prevUnreadCount = 0;
 
-const isRunning = app.makeSingleInstance(() => {
-  if (mainWindow) {
-    if (mainWindow.isMinimized()) {
-      mainWindow.restore();
-    }
-    if (!mainWindow.isVisible()) {
-      mainWindow.show();
-    }
-    mainWindow.focus();
-  }
-});
-
-if (isRunning) {
+const gotTheLock = app.requestSingleInstanceLock();
+if (!gotTheLock) {
   app.quit();
   process.exit();
 }
@@ -144,6 +133,18 @@ app.on('ready', () => {
     }
     shell.openExternal(url);
   });
+});
+
+app.on('second-instance', () => {
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+    if (!mainWindow.isVisible()) {
+      mainWindow.show();
+    }
+    mainWindow.focus();
+  }
 });
 
 app.on('activate', () => {
