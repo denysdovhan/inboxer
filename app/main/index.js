@@ -112,10 +112,6 @@ app.on('ready', () => {
 
   const { webContents } = mainWindow;
 
-  webContents.on('dom-ready', () => {
-    webContents.insertCSS(fs.readFileSync(path.join(__dirname, '../renderer/browser.css'), 'utf8'));
-  });
-
   webContents.on('will-navigate', (e, url) => {
     if (config.get('sendAnalytics')) analytics.track('will-navigate');
     if (!allowedUrl(url)) {
