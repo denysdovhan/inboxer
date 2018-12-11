@@ -18,7 +18,7 @@ app.setAppUserModelId('com.denysdovhan.inboxer');
 require('electron-dl')();
 require('electron-context-menu')();
 
-const mainURL = 'https://inbox.google.com/';
+const mainURL = 'https://gmail.com/';
 
 let mainWindow;
 let isQuitting = false;
