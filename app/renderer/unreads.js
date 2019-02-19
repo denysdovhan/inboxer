@@ -20,7 +20,7 @@ function extractSubject(message) {
 }
 
 function extractSender(message) {
-  return $('span.bA4 span', message).textContent;
+  return $('span.bA4', message).textContent;
 }
 
 function extractConversationLength(message) {
