@@ -4,6 +4,7 @@ const {
 const { ipcRenderer: ipc } = require('electron');
 
 const seenMessages = new Map();
+const iconMail = "https://www.gstatic.com/images/icons/material/system/2x/inbox_gm_googlered600_24dp.png"
 
 function keyByMessage({ subject, sender, conversationLength }) {
   try {
@@ -14,62 +15,41 @@ function keyByMessage({ subject, sender, conversationLength }) {
   }
 }
 
-function extractSubject(el) {
-  return ($('.lt', el) || $('.qG span', el)).textContent;
+function extractSubject(message) {
+  return $('.y6 span span', message).textContent;
 }
 
-function extractAvatar(el, message) {
-  const brand = message.getAttribute('brand_avatar_url');
-  if (brand) {
-    return brand;
-  }
-
-  const image = $('.Kc img[src], .pE img[src]', el);
-  if (image) {
-    return image.src;
-  }
-
-  return null;
+function extractSender(message) {
+  return $('span.bA4 span', message).textContent;
 }
 
-function extractSender(el, message) {
-  const brand = message.getAttribute('brand_name');
-  if (brand) {
-    return brand;
-  }
-
-  return $('[email]', el).textContent;
-}
-
-function extractConversationLength(el) {
-  const lenSpan = $('span.qi', el);
+function extractConversationLength(message) {
+  const lenSpan = $('span.bx0', message);
   return (lenSpan) ? lenSpan.textContent : null;
 }
 
+// name of currently selected folder: Inbox, Sent, ...
+function folderName() {
+  const folder = $('div.TK div.aim.ain div.TO');
+  return (folder) ? folder.getAttribute('data-tooltip') : null;
+}
+
+
 function getUnreadMessages() {
-  return Array.from($$('.ss'))
+  return Array.from($$('tr.zA.zE'))
     .map((message) => {
-      const ancestorEl = ancestor(message, '.jS');
-
-      if (ancestor(ancestorEl, '.full-cluster-item')) {
-        return null;
-      }
-
       return {
-        element: ancestorEl,
-        subject: extractSubject(ancestorEl),
-        sender: extractSender(ancestorEl, message),
-        avatar: extractAvatar(ancestorEl, message),
-        conversationLength: extractConversationLength(ancestorEl),
+        element: message,
+        subject: extractSubject(message),
+        sender: extractSender(message),
+        conversationLength: extractConversationLength(message),
       };
-    })
-    .filter(Boolean);
+    });
 }
 
 function checkUnreads(period = 2000) {
   // skip if we're not inside the inbox
-  const isInbox = $('.hA [title=Inbox]');
-  if (!isInbox) {
+  if (folderName() !== 'Inbox') {
     setTimeout(checkUnreads, period);
     return;
   }
@@ -89,7 +69,7 @@ function checkUnreads(period = 2000) {
 
   unreads.forEach((message) => {
     const {
-      element, subject, sender, avatar,
+      element, subject, sender,
     } = message;
     const key = keyByMessage(message);
     // do not show the same notification every time on start up
@@ -97,7 +77,7 @@ function checkUnreads(period = 2000) {
       sendNotification({
         title: sender,
         body: subject,
-        icon: avatar,
+        icon: iconMail,
       }).addEventListener('click', () => {
         ipc.send('show-window', true);
         sendClick(element);
