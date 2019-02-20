@@ -1,13 +1,21 @@
 const { ipcRenderer: ipc } = require('electron');
+const path = require('path');
 const {
   $, $$, ancestor, sendNotification, sendClick,
 } = require('./utils');
 
 const seenMessages = new Map();
 
-function keyByMessage({ subject, sender, conversationLength }) {
+// snoozed logo copied from Inbox
+const iconSnoozed = path.join(__dirname, '..', 'static/IconSnoozed.png');
+
+function keyByMessage({
+  messageType, subject, sender, conversationLength,
+}) {
   try {
-    return JSON.stringify({ subject, sender, conversationLength });
+    return JSON.stringify({
+      messageType, subject, sender, conversationLength,
+    });
   } catch (error) {
     console.error(error); // eslint-disable-line
     return undefined;
@@ -15,7 +23,7 @@ function keyByMessage({ subject, sender, conversationLength }) {
 }
 
 function extractSubject(el) {
-  return ($('.lt', el) || $('.qG span', el)).textContent;
+  return ($('.lt', el) || $('.qG span', el) || $('div.bg > span', el)).textContent;
 }
 
 function extractAvatar(el, message) {
@@ -41,6 +49,11 @@ function extractSender(el, message) {
   return $('[email]', el).textContent;
 }
 
+function extractSnoozedSender(message) {
+  const senderSpan = $('div.rw > span', message);
+  return senderSpan.textContent;
+}
+
 function extractConversationLength(el) {
   const lenSpan = $('span.qi', el);
   return (lenSpan) ? lenSpan.textContent : null;
@@ -57,6 +70,7 @@ function getUnreadMessages() {
 
       return {
         element: ancestorEl,
+        messageType: 'unread',
         subject: extractSubject(ancestorEl),
         sender: extractSender(ancestorEl, message),
         avatar: extractAvatar(ancestorEl, message),
@@ -64,6 +78,21 @@ function getUnreadMessages() {
       };
     })
     .filter(Boolean);
+}
+
+function getSnoozedMessages() {
+  return Array.from($$('div.pW'))
+    .map((snoozeDiv) => {
+      const message = ancestor(snoozeDiv, '.jS');
+
+      return {
+        element: message,
+        messageType: 'snoozed',
+        subject: extractSubject(message),
+        sender: extractSnoozedSender(message),
+        conversationLength: extractConversationLength(message),
+      };
+    });
 }
 
 function checkUnreads(period = 2000) {
@@ -79,6 +108,7 @@ function checkUnreads(period = 2000) {
   }
 
   const unreads = getUnreadMessages();
+  const snoozed = getSnoozedMessages();
 
   ipc.send('update-unreads-count', unreads.length);
 
@@ -98,6 +128,27 @@ function checkUnreads(period = 2000) {
         title: sender,
         body: subject,
         icon: avatar,
+      }).addEventListener('click', () => {
+        ipc.send('show-window', true);
+        sendClick(element);
+      });
+    }
+    // mark message as seen
+    seenMessages.set(key, true);
+  });
+
+  // notify about new snoozed messages
+  snoozed.forEach((message) => {
+    const {
+      element, subject, sender,
+    } = message;
+    const key = keyByMessage(message);
+    // do not show the same notification every time on start up
+    if (!checkUnreads.startingUp && !seenMessages.has(key)) {
+      sendNotification({
+        title: sender,
+        body: subject,
+        icon: `file://${iconSnoozed}`,
       }).addEventListener('click', () => {
         ipc.send('show-window', true);
         sendClick(element);
