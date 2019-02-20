@@ -46,8 +46,11 @@ function extractNumberUnread() {
   return (isNaN(numUnread)) ? 0 : numUnread;
 }
 
-function getUnreadMessages() {
-  return Array.from($$('tr.zA.zE'))
+function getUnreadMessages(messageTable) {
+  if (messageTable == null) {
+    return [];
+  }
+  return Array.from($$('tr.zA.zE', messageTable))
     .map((message) => {
       return {
         element: message,
@@ -79,8 +82,8 @@ function checkUnreads(period = 2000) {
     checkUnreads.startingUp = true;
   }
 
-  const unreads = getUnreadMessages();
-
+  const messageTable = $('div.Cp table.F tbody');
+  const unreads = getUnreadMessages(messageTable);
 
   // mark all previously seen messages as false
   seenMessages.forEach((value, key, map) => {
