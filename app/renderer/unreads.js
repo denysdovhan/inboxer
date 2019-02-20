@@ -5,9 +5,12 @@ const { ipcRenderer: ipc } = require('electron');
 const path = require('path');
 
 const seenUnreadMessages = new Map();
+const seenSnoozedMessages = new Map();
 
 // gmail logo from https://gsuite.google.com/setup/resources/logos/
 const iconMail = path.join(__dirname, '..', 'static/gmail_48px.png');
+// snoozed logo copied from Inboxer
+const iconSnoozed = path.join(__dirname, '..', 'static/IconSnoozed.png');
 
 function keyByMessage({ subject, sender, conversationLength }) {
   try {
@@ -64,6 +67,23 @@ function getUnreadMessages(messageTable) {
     });
 }
 
+function getSnoozedMessages(messageTable) {
+  if (messageTable == null) {
+    return [];
+  }
+  return Array.from($$('td.byZ div.by1', messageTable))
+    .map((snoozeDiv) => {
+      const message = ancestor(snoozeDiv, 'tr.zA');
+
+      return {
+        element: message,
+        subject: extractSubject(message),
+        sender: extractSender(message),
+        conversationLength: extractConversationLength(message),
+      };
+    });
+}
+
 function markMessageMap(messageMap) {
   messageMap.forEach((value, key, map) => {
     map.set(key, false);
@@ -101,9 +121,11 @@ function checkUnreads(period = 2000) {
 
   const messageTable = $('div.Cp table.F tbody');
   const unreads = getUnreadMessages(messageTable);
+  const snoozed = getSnoozedMessages(messageTable);
 
   // mark all previously seen messages as false
   markMessageMap(seenUnreadMessages);
+  markMessageMap(seenSnoozedMessages);
 
   // notify about new unread messages
   unreads.forEach((message) => {
@@ -126,8 +148,30 @@ function checkUnreads(period = 2000) {
     seenUnreadMessages.set(key, true);
   });
 
+  // notify about new snoozed messages
+  snoozed.forEach((message) => {
+    const {
+      element, subject, sender,
+    } = message;
+    const key = keyByMessage(message);
+    // do not show the same notification every time on start up
+    if (!checkUnreads.startingUp && !seenSnoozedMessages.has(key)) {
+      sendNotification({
+        title: sender,
+        body: subject,
+        icon: `file://${iconSnoozed}`,
+      }).addEventListener('click', () => {
+        ipc.send('show-window', true);
+        sendClick(element);
+      });
+    }
+    // mark message as seen
+    seenSnoozedMessages.set(key, true);
+  });
+
   // clean up old entries in seenUnreadMessages (entries that are still false)
   cleanupMessageMap(seenUnreadMessages);
+  cleanupMessageMap(seenSnoozedMessages);
 
   if (checkUnreads.startingUp) {
     checkUnreads.startingUp = false;
