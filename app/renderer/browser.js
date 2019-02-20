@@ -2,29 +2,46 @@ const { ipcRenderer: ipc } = require('electron');
 const checkUnreads = require('./unreads');
 const { $, $$, renderOverlayIcon } = require('./utils');
 
-ipc.on('toggle-sidebar', () => $('.aO.AK.ew').click());
+ipc.on('toggle-sidebar', () => $('div.gb_zc').click());
 
 ipc.on('show-preferences', () => $('.oin9Fc.cQ.lN').click());
 
+
+function selectFolder(name) {
+  const selector = `div.TK div.aim div.TO[data-tooltip="${name}"]`;
+  let folder = $(selector);
+  if (folder == null) {
+    // if folder was not found, try clicking "More" button
+    const moreButton = $('span.J-Ke');
+    if (moreButton) {
+      moreButton.click();
+      folder = $(selector); // try to find folder again
+    }
+  }
+  if (folder) {
+    folder.click();
+  }
+}
+
 // primary folder shortcuts
 
-ipc.on('go-to-inbox', () => $$('.pa .oin9Fc.cN')[0].click());
-ipc.on('go-to-snoozed', () => $$('.pa .oin9Fc.cN')[1].click());
-ipc.on('go-to-done', () => $$('.pa .oin9Fc.cN')[2].click());
+ipc.on('go-to-inbox', () => selectFolder('Inbox'));
+ipc.on('go-to-snoozed', () => selectFolder('Snoozed'));
+ipc.on('go-to-done', () => selectFolder('All Mail'));
 
 // secondary folder shortcuts
 
-ipc.on('go-to-drafts', () => $$('.pa + .Y .oin9Fc.cQ')[0].click());
-ipc.on('go-to-sent', () => $$('.pa + .Y .oin9Fc.cQ')[1].click());
-ipc.on('go-to-reminders', () => $$('.pa + .Y .oin9Fc.cQ')[2].click());
-ipc.on('go-to-trash', () => $$('.pa + .Y .oin9Fc.cQ')[3].click());
-ipc.on('go-to-spam', () => $$('.pa + .Y .oin9Fc.cQ')[4].click());
-ipc.on('go-to-contacts', () => $$('.pa + .Y .oin9Fc.cQ')[5].click());
+ipc.on('go-to-drafts', () => selectFolder('Drafts'));
+ipc.on('go-to-sent', () => selectFolder('Sent'));
+ipc.on('go-to-reminders', () => $$('.pa + .Y .oin9Fc.cQ')[2].click());  // **FIXME**
+ipc.on('go-to-trash', () => selectFolder('Trash'));
+ipc.on('go-to-spam', () => selectFolder('Spam'));
+ipc.on('go-to-contacts', () => $$('.pa + .Y .oin9Fc.cQ')[5].click());   // **FIXME**
 
-ipc.on('go-to-search', () => $('.gc.sp.g-lW').click());
+ipc.on('go-to-search', () => $('input.gb_Df').focus());
 
 ipc.on('sign-out', () => $('#gb_71').click());
-ipc.on('add-account', () => $('.gb_Fa.gb_Nf.gb_Ee.gb_Eb').click());
+ipc.on('add-account', () => $('.gb_Fa.gb_Nf.gb_Ee.gb_Eb').click());    // **FIXME**
 
 ipc.on('render-overlay-icon', (event, unreadsCount) => {
   ipc.send(
