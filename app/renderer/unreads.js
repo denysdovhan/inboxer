@@ -2,9 +2,12 @@ const {
   $, $$, ancestor, sendNotification, sendClick,
 } = require('./utils');
 const { ipcRenderer: ipc } = require('electron');
+const path = require('path');
 
 const seenUnreadMessages = new Map();
-const iconMail = "https://www.gstatic.com/images/icons/material/system/2x/inbox_gm_googlered600_24dp.png"
+
+// gmail logo from https://gsuite.google.com/setup/resources/logos/
+const iconMail = path.join(__dirname, '..', 'static/gmail_48px.png');
 
 function keyByMessage({ subject, sender, conversationLength }) {
   try {
@@ -113,7 +116,7 @@ function checkUnreads(period = 2000) {
       sendNotification({
         title: sender,
         body: subject,
-        icon: iconMail,
+        icon: `file://${iconMail}`,
       }).addEventListener('click', () => {
         ipc.send('show-window', true);
         sendClick(element);
