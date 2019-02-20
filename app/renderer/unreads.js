@@ -59,8 +59,15 @@ function getUnreadMessages() {
 }
 
 function checkUnreads(period = 2000) {
+  if (typeof checkUnreads.haveUnread === 'undefined') {
+    checkUnreads.haveUnread = false;
+  }
+
   const numUnread = extractNumberUnread();
-  ipc.send('update-unreads-count', numUnread);
+  if (checkUnreads.haveUnread !== (numUnread > 0)) {
+    ipc.send('update-unreads-count', numUnread);
+    checkUnreads.haveUnread = (numUnread > 0);
+  }
 
   // skip if we're not inside the inbox
   if (folderName() !== 'Inbox') {
