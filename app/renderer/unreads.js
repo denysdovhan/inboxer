@@ -3,7 +3,7 @@ const {
 } = require('./utils');
 const { ipcRenderer: ipc } = require('electron');
 
-const seenMessages = new Map();
+const seenUnreadMessages = new Map();
 const iconMail = "https://www.gstatic.com/images/icons/material/system/2x/inbox_gm_googlered600_24dp.png"
 
 function keyByMessage({ subject, sender, conversationLength }) {
@@ -61,6 +61,20 @@ function getUnreadMessages(messageTable) {
     });
 }
 
+function markMessageMap(messageMap) {
+  messageMap.forEach((value, key, map) => {
+    map.set(key, false);
+  });
+}
+
+function cleanupMessageMap(messageMap) {
+  messageMap.forEach((value, key, map) => {
+    if (value === false) {
+      map.delete(key);
+    }
+  });
+}
+
 function checkUnreads(period = 2000) {
   if (typeof checkUnreads.haveUnread === 'undefined') {
     checkUnreads.haveUnread = false;
@@ -86,17 +100,16 @@ function checkUnreads(period = 2000) {
   const unreads = getUnreadMessages(messageTable);
 
   // mark all previously seen messages as false
-  seenMessages.forEach((value, key, map) => {
-    map.set(key, false);
-  });
+  markMessageMap(seenUnreadMessages);
 
+  // notify about new unread messages
   unreads.forEach((message) => {
     const {
       element, subject, sender,
     } = message;
     const key = keyByMessage(message);
     // do not show the same notification every time on start up
-    if (!checkUnreads.startingUp && !seenMessages.has(key)) {
+    if (!checkUnreads.startingUp && !seenUnreadMessages.has(key)) {
       sendNotification({
         title: sender,
         body: subject,
@@ -107,15 +120,11 @@ function checkUnreads(period = 2000) {
       });
     }
     // mark message as seen
-    seenMessages.set(key, true);
+    seenUnreadMessages.set(key, true);
   });
 
-  // clean up old entries in seenMessages
-  seenMessages.forEach((value, key, map) => {
-    if (value === false) {
-      map.delete(key);
-    }
-  });
+  // clean up old entries in seenUnreadMessages (entries that are still false)
+  cleanupMessageMap(seenUnreadMessages);
 
   if (checkUnreads.startingUp) {
     checkUnreads.startingUp = false;
