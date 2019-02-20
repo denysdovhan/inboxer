@@ -34,6 +34,17 @@ function folderName() {
   return (folder) ? folder.getAttribute('data-tooltip') : null;
 }
 
+// extract number of unread messages in Inbox from the left column
+// works even if we're not in Inbox
+function extractNumberUnread() {
+  // div.TK: left column, main folders
+  // div.aim: each folder (Inbox, Starred, Sent, ...)
+  // div.TO with data-tooltip="Inbox": Inbox folder
+  // div.bsU: contains number of unread messages
+  const numUnreadDiv = $('div.TK div.aim div.TO[data-tooltip="Inbox"] div.bsU');
+  const numUnread = (numUnreadDiv) ? parseInt(numUnreadDiv.textContent, 10) : 0;
+  return (isNaN(numUnread)) ? 0 : numUnread;
+}
 
 function getUnreadMessages() {
   return Array.from($$('tr.zA.zE'))
@@ -48,6 +59,9 @@ function getUnreadMessages() {
 }
 
 function checkUnreads(period = 2000) {
+  const numUnread = extractNumberUnread();
+  ipc.send('update-unreads-count', numUnread);
+
   // skip if we're not inside the inbox
   if (folderName() !== 'Inbox') {
     setTimeout(checkUnreads, period);
@@ -60,7 +74,6 @@ function checkUnreads(period = 2000) {
 
   const unreads = getUnreadMessages();
 
-  ipc.send('update-unreads-count', unreads.length);
 
   // mark all previously seen messages as false
   seenMessages.forEach((value, key, map) => {
