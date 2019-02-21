@@ -10,16 +10,13 @@ ipc.on('show-preferences', () => $('.oin9Fc.cQ.lN').click());
 function selectFolder(name) {
   const selector = `div.TK div.aim div.TO[data-tooltip="${name}"]`;
   let folder = $(selector);
-  if (folder == null) {
-    // if folder was not found, try clicking "More" button
-    const moreButton = $('span.J-Ke');
-    if (moreButton) {
-      moreButton.click();
-      folder = $(selector); // try to find folder again
-    }
-  }
   if (folder) {
     folder.click();
+  } else {
+    // if folder was not found, try loading correct URL
+    const folder = name.split(' ')[0].toLowerCase();
+    const url = `https://mail.google.com/mail/#${folder}`;
+    window.location.assign(url);
   }
 }
 
