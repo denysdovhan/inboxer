@@ -18,7 +18,7 @@ app.setAppUserModelId('com.denysdovhan.inboxer');
 require('electron-dl')();
 require('electron-context-menu')();
 
-const mainURL = 'https://gmail.com/';
+const mainURL = 'https://mail.google.com/';
 
 let mainWindow;
 let isQuitting = false;
@@ -39,6 +39,7 @@ function allowedUrl(url) {
     'https://**.okta.com/**',
     'https://google.*/accounts/**',
     'https://www.google.**/accounts/signin/continue**',
+    'https://mail.google.com/**',
     path.join('file://', __dirname, '../renderer/preferences**'),
   ];
 
