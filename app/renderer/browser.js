@@ -2,6 +2,8 @@ const { ipcRenderer: ipc } = require('electron');
 const checkUnreads = require('./unreads');
 const { $, $$, renderOverlayIcon } = require('./utils');
 
+const doneURL = 'https://mail.google.com/mail/#search/-in%3Ainbox+-in%3Aspam+-in%3Atrash+-in%3Achats';
+
 ipc.on('toggle-sidebar', () => $('div.gb_zc').click());
 
 ipc.on('show-preferences', () => $('.oin9Fc.cQ.lN').click());
@@ -20,11 +22,15 @@ function selectFolder(name) {
   }
 }
 
+function loadURL(url) {
+  window.location.assign(url);
+}
+
 // primary folder shortcuts
 
 ipc.on('go-to-inbox', () => selectFolder('Inbox'));
 ipc.on('go-to-snoozed', () => selectFolder('Snoozed'));
-ipc.on('go-to-done', () => selectFolder('All Mail'));
+ipc.on('go-to-done', () => loadURL(doneURL));
 
 // secondary folder shortcuts
 
