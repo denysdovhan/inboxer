@@ -3,6 +3,8 @@ const checkUnreads = require('./unreads');
 const { $, $$, renderOverlayIcon } = require('./utils');
 
 const doneURL = 'https://mail.google.com/mail/#search/-in%3Ainbox+-in%3Aspam+-in%3Atrash+-in%3Achats';
+const contactsURL = 'https://contacts.google.com/';
+const addAccountURL = 'https://accounts.google.com/AddSession';
 
 ipc.on('toggle-sidebar', () => $('div.gb_zc').click());
 
@@ -39,12 +41,12 @@ ipc.on('go-to-sent', () => selectFolder('Sent'));
 ipc.on('go-to-reminders', () => $$('.pa + .Y .oin9Fc.cQ')[2].click()); // **FIXME**
 ipc.on('go-to-trash', () => selectFolder('Trash'));
 ipc.on('go-to-spam', () => selectFolder('Spam'));
-ipc.on('go-to-contacts', () => $$('.pa + .Y .oin9Fc.cQ')[5].click()); // **FIXME**
+ipc.on('go-to-contacts', () => loadURL(contactsURL));
 
 ipc.on('go-to-search', () => $('input.gb_Df').focus());
 
 ipc.on('sign-out', () => $('#gb_71').click());
-ipc.on('add-account', () => $('.gb_Fa.gb_Nf.gb_Ee.gb_Eb').click()); // **FIXME**
+ipc.on('add-account', () => loadURL(addAccountURL));
 
 ipc.on('render-overlay-icon', (event, unreadsCount) => {
   ipc.send(

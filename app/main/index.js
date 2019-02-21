@@ -39,6 +39,7 @@ function allowedUrl(url) {
     'https://google.*/accounts/**',
     'https://www.google.**/accounts/signin/continue**',
     'https://mail.google.com/**',
+    'https://contacts.google.com/**',
     path.join('file://', __dirname, '../renderer/preferences**'),
   ];
 
