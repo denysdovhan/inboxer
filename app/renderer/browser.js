@@ -9,13 +9,13 @@ ipc.on('show-preferences', () => $('.oin9Fc.cQ.lN').click());
 
 function selectFolder(name) {
   const selector = `div.TK div.aim div.TO[data-tooltip="${name}"]`;
-  let folder = $(selector);
+  const folder = $(selector);
   if (folder) {
     folder.click();
   } else {
     // if folder was not found, try loading correct URL
-    const folder = name.split(' ')[0].toLowerCase();
-    const url = `https://mail.google.com/mail/#${folder}`;
+    const urlName = name.split(' ')[0].toLowerCase();
+    const url = `https://mail.google.com/mail/#${urlName}`;
     window.location.assign(url);
   }
 }
@@ -30,15 +30,15 @@ ipc.on('go-to-done', () => selectFolder('All Mail'));
 
 ipc.on('go-to-drafts', () => selectFolder('Drafts'));
 ipc.on('go-to-sent', () => selectFolder('Sent'));
-ipc.on('go-to-reminders', () => $$('.pa + .Y .oin9Fc.cQ')[2].click());  // **FIXME**
+ipc.on('go-to-reminders', () => $$('.pa + .Y .oin9Fc.cQ')[2].click()); // **FIXME**
 ipc.on('go-to-trash', () => selectFolder('Trash'));
 ipc.on('go-to-spam', () => selectFolder('Spam'));
-ipc.on('go-to-contacts', () => $$('.pa + .Y .oin9Fc.cQ')[5].click());   // **FIXME**
+ipc.on('go-to-contacts', () => $$('.pa + .Y .oin9Fc.cQ')[5].click()); // **FIXME**
 
 ipc.on('go-to-search', () => $('input.gb_Df').focus());
 
 ipc.on('sign-out', () => $('#gb_71').click());
-ipc.on('add-account', () => $('.gb_Fa.gb_Nf.gb_Ee.gb_Eb').click());    // **FIXME**
+ipc.on('add-account', () => $('.gb_Fa.gb_Nf.gb_Ee.gb_Eb').click()); // **FIXME**
 
 ipc.on('render-overlay-icon', (event, unreadsCount) => {
   ipc.send(

@@ -49,7 +49,7 @@ function extractNumberUnread() {
   // div.bsU: contains number of unread messages
   const numUnreadDiv = $('div.TK div.aim div.TO[data-tooltip="Inbox"] div.bsU');
   const numUnread = (numUnreadDiv) ? parseInt(numUnreadDiv.textContent, 10) : 0;
-  return (isNaN(numUnread)) ? 0 : numUnread;
+  return (Number.isNaN(numUnread)) ? 0 : numUnread;
 }
 
 function getUnreadMessages(messageTable) {
@@ -57,14 +57,12 @@ function getUnreadMessages(messageTable) {
     return [];
   }
   return Array.from($$('tr.zA.zE', messageTable))
-    .map((message) => {
-      return {
-        element: message,
-        subject: extractSubject(message),
-        sender: extractSender(message),
-        conversationLength: extractConversationLength(message),
-      };
-    });
+    .map(message => ({
+      element: message,
+      subject: extractSubject(message),
+      sender: extractSender(message),
+      conversationLength: extractConversationLength(message),
+    }));
 }
 
 function getSnoozedMessages(messageTable) {
