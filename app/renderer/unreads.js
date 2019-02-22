@@ -1,7 +1,7 @@
 const { ipcRenderer: ipc } = require('electron');
 const path = require('path');
 const {
-  $, $$, ancestor, sendNotification, sendClick,
+  $, $$, sendNotification, sendClick,
 } = require('./utils');
 
 const seenMessages = new Map();
@@ -87,6 +87,63 @@ function getSnoozedMessages(messageTable) {
     });
 }
 
+// returns array of notifications: {message, title, body, icon}
+function findUnreadSnoozedMessages() {
+  const messageTable = $('div.Cp table.F');
+  if (messageTable === null) {
+    return [];
+  }
+  const notifications = [];
+
+  // mark already seen messages false
+  seenMessages.forEach((value, key, map) => {
+    map.set(key, false);
+  });
+
+  // iterate through all messages (rows in table)
+  $$('table.F > tbody > tr', messageTable).forEach((message) => {
+    let messageType = null;
+    if (message.className.includes('zA zE')) { // unread message  <tr class="zA zE ..." ...>
+      messageType = 'unread';
+    } else if ($('td.byZ div.by1', message) !== null) { // snoozed message
+      messageType = 'snoozed';
+    }
+
+    if (messageType !== null) {
+      const subject = extractSubject(message);
+      const sender = extractSender(message);
+      const conversationLength = extractConversationLength(message);
+      const key = keyByMessage({
+        messageType,
+        subject,
+        sender,
+        conversationLength,
+      });
+
+      // if message hasn't been seen before, schedule notification
+      if (!seenMessages.has(key)) {
+        const icon = (messageType === 'unread') ? iconMail : iconSnoozed;
+        notifications.push({
+          message,
+          title: sender,
+          body: subject,
+          icon: `file://${icon}`,
+        });
+      }
+      seenMessages.set(key, true); // mark message as seen
+    }
+  });
+
+  // delete any seenMessages still marked false
+  seenMessages.forEach((value, key, map) => {
+    if (value === false) {
+      map.delete(key);
+    }
+  });
+
+  return notifications;
+}
+
 function checkUnreads(period = 2000) {
   if (typeof checkUnreads.haveUnread === 'undefined') {
     checkUnreads.haveUnread = false;
@@ -108,63 +165,23 @@ function checkUnreads(period = 2000) {
     checkUnreads.startingUp = true;
   }
 
-  const messageTable = $('div.Cp table.F tbody');
-  const unreads = getUnreadMessages(messageTable);
-  const snoozed = getSnoozedMessages(messageTable);
-
-  // mark all previously seen messages as false
-  seenMessages.forEach((value, key, map) => {
-    map.set(key, false);
-  });
-
-  // notify about new unread messages
-  unreads.forEach((message) => {
-    const {
-      element, subject, sender,
-    } = message;
-    const key = keyByMessage(message);
-    // do not show the same notification every time on start up
-    if (!checkUnreads.startingUp && !seenMessages.has(key)) {
+  // notifications for new unread or snoozed messages
+  const notifications = findUnreadSnoozedMessages();
+  if (!checkUnreads.startingUp) { // send notifications only if we're not just starting up
+    notifications.forEach((notification) => {
+      const {
+        message, title, body, icon,
+      } = notification;
       sendNotification({
-        title: sender,
-        body: subject,
-        icon: `file://${iconMail}`,
+        title,
+        body,
+        icon,
       }).addEventListener('click', () => {
         ipc.send('show-window', true);
-        sendClick(element);
+        sendClick(message);
       });
-    }
-    // mark message as seen
-    seenMessages.set(key, true);
-  });
-
-  // notify about new snoozed messages
-  snoozed.forEach((message) => {
-    const {
-      element, subject, sender,
-    } = message;
-    const key = keyByMessage(message);
-    // do not show the same notification every time on start up
-    if (!checkUnreads.startingUp && !seenMessages.has(key)) {
-      sendNotification({
-        title: sender,
-        body: subject,
-        icon: `file://${iconSnoozed}`,
-      }).addEventListener('click', () => {
-        ipc.send('show-window', true);
-        sendClick(element);
-      });
-    }
-    // mark message as seen
-    seenMessages.set(key, true);
-  });
-
-  // clean up old entries in seenUnreadMessages (entries that are still false)
-  seenMessages.forEach((value, key, map) => {
-    if (value === false) {
-      map.delete(key);
-    }
-  });
+    });
+  }
 
   if (checkUnreads.startingUp) {
     checkUnreads.startingUp = false;
