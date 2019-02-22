@@ -4,17 +4,20 @@ const {
   $, $$, ancestor, sendNotification, sendClick,
 } = require('./utils');
 
-const seenUnreadMessages = new Map();
-const seenSnoozedMessages = new Map();
+const seenMessages = new Map();
 
 // gmail logo from https://gsuite.google.com/setup/resources/logos/
 const iconMail = path.join(__dirname, '..', 'static/gmail_48px.png');
 // snoozed logo copied from Inboxer
 const iconSnoozed = path.join(__dirname, '..', 'static/IconSnoozed.png');
 
-function keyByMessage({ subject, sender, conversationLength }) {
+function keyByMessage({
+  messageType, subject, sender, conversationLength,
+}) {
   try {
-    return JSON.stringify({ subject, sender, conversationLength });
+    return JSON.stringify({
+      messageType, subject, sender, conversationLength,
+    });
   } catch (error) {
     console.error(error); // eslint-disable-line
     return undefined;
@@ -59,6 +62,7 @@ function getUnreadMessages(messageTable) {
   return Array.from($$('tr.zA.zE', messageTable))
     .map(message => ({
       element: message,
+      messageType: 'unread',
       subject: extractSubject(message),
       sender: extractSender(message),
       conversationLength: extractConversationLength(message),
@@ -75,25 +79,12 @@ function getSnoozedMessages(messageTable) {
 
       return {
         element: message,
+	messageType: 'snoozed',
         subject: extractSubject(message),
         sender: extractSender(message),
         conversationLength: extractConversationLength(message),
       };
     });
-}
-
-function markMessageMap(messageMap) {
-  messageMap.forEach((value, key, map) => {
-    map.set(key, false);
-  });
-}
-
-function cleanupMessageMap(messageMap) {
-  messageMap.forEach((value, key, map) => {
-    if (value === false) {
-      map.delete(key);
-    }
-  });
 }
 
 function checkUnreads(period = 2000) {
@@ -122,8 +113,9 @@ function checkUnreads(period = 2000) {
   const snoozed = getSnoozedMessages(messageTable);
 
   // mark all previously seen messages as false
-  markMessageMap(seenUnreadMessages);
-  markMessageMap(seenSnoozedMessages);
+  seenMessages.forEach((value, key, map) => {
+    map.set(key, false);
+  });
 
   // notify about new unread messages
   unreads.forEach((message) => {
@@ -132,7 +124,7 @@ function checkUnreads(period = 2000) {
     } = message;
     const key = keyByMessage(message);
     // do not show the same notification every time on start up
-    if (!checkUnreads.startingUp && !seenUnreadMessages.has(key)) {
+    if (!checkUnreads.startingUp && !seenMessages.has(key)) {
       sendNotification({
         title: sender,
         body: subject,
@@ -143,7 +135,7 @@ function checkUnreads(period = 2000) {
       });
     }
     // mark message as seen
-    seenUnreadMessages.set(key, true);
+    seenMessages.set(key, true);
   });
 
   // notify about new snoozed messages
@@ -153,7 +145,7 @@ function checkUnreads(period = 2000) {
     } = message;
     const key = keyByMessage(message);
     // do not show the same notification every time on start up
-    if (!checkUnreads.startingUp && !seenSnoozedMessages.has(key)) {
+    if (!checkUnreads.startingUp && !seenMessages.has(key)) {
       sendNotification({
         title: sender,
         body: subject,
@@ -164,12 +156,15 @@ function checkUnreads(period = 2000) {
       });
     }
     // mark message as seen
-    seenSnoozedMessages.set(key, true);
+    seenMessages.set(key, true);
   });
 
   // clean up old entries in seenUnreadMessages (entries that are still false)
-  cleanupMessageMap(seenUnreadMessages);
-  cleanupMessageMap(seenSnoozedMessages);
+  seenMessages.forEach((value, key, map) => {
+    if (value === false) {
+      map.delete(key);
+    }
+  });
 
   if (checkUnreads.startingUp) {
     checkUnreads.startingUp = false;
