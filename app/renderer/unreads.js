@@ -55,38 +55,6 @@ function extractNumberUnread() {
   return (Number.isNaN(numUnread)) ? 0 : numUnread;
 }
 
-function getUnreadMessages(messageTable) {
-  if (messageTable == null) {
-    return [];
-  }
-  return Array.from($$('tr.zA.zE', messageTable))
-    .map(message => ({
-      element: message,
-      messageType: 'unread',
-      subject: extractSubject(message),
-      sender: extractSender(message),
-      conversationLength: extractConversationLength(message),
-    }));
-}
-
-function getSnoozedMessages(messageTable) {
-  if (messageTable == null) {
-    return [];
-  }
-  return Array.from($$('td.byZ div.by1', messageTable))
-    .map((snoozeDiv) => {
-      const message = ancestor(snoozeDiv, 'tr.zA');
-
-      return {
-        element: message,
-	messageType: 'snoozed',
-        subject: extractSubject(message),
-        sender: extractSender(message),
-        conversationLength: extractConversationLength(message),
-      };
-    });
-}
-
 // returns array of notifications: {message, title, body, icon}
 function findUnreadSnoozedMessages() {
   const messageTable = $('div.Cp table.F');
