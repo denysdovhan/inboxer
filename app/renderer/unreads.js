@@ -1,7 +1,7 @@
+const { ipcRenderer: ipc } = require('electron');
 const {
   $, $$, ancestor, sendNotification, sendClick,
 } = require('./utils');
-const { ipcRenderer: ipc } = require('electron');
 const path = require('path');
 
 const seenUnreadMessages = new Map();
