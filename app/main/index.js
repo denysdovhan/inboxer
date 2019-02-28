@@ -39,6 +39,11 @@ function allowedUrl(url) {
     'https://google.*/accounts/**',
     'https://www.google.**/accounts/signin/continue**',
     'https://mail.google.com/**',
+    'https://drive.google.com/**',
+    'https://docs.google.com/**',
+    'https://www.google.com/calendar**',
+    'https://sites.google.com/**',
+    'https://chat.google.com/**',
     'https://contacts.google.com/**',
     path.join('file://', __dirname, '../renderer/preferences**'),
   ];
