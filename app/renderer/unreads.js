@@ -136,7 +136,7 @@ function checkUnreads(period = 2000) {
   // notifications for new unread or snoozed messages
   const notifications = findUnreadSnoozedMessages();
   if (!checkUnreads.startingUp) { // send notifications only if we're not just starting up
-    notifications.forEach((notification) => {
+    notifications.reverse().forEach((notification) => {
       const {
         message, title, body, icon,
       } = notification;
