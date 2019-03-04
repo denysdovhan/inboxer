@@ -1,11 +1,12 @@
 const path = require('path');
 const {
-  app, BrowserWindow, Menu, shell, ipcMain, nativeImage,
+  app, BrowserWindow, Menu, shell, ipcMain, nativeImage, Notification,
 } = require('electron');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
 const { autoUpdater } = require('electron-updater');
 const minimatch = require('minimatch-all');
+const electronDL = require('electron-dl');
 const { isDarwin, isLinux, isWindows } = require('./utils');
 const config = require('./config');
 const appMenu = require('./menu');
@@ -14,7 +15,6 @@ const analytics = require('./analytics');
 
 app.setAppUserModelId('com.denysdovhan.inboxer');
 
-require('electron-dl')();
 require('electron-context-menu')();
 
 const mainURL = 'https://mail.google.com/';
@@ -204,3 +204,20 @@ ipcMain.on('update-overlay-icon', (e, image, count) => {
 ipcMain.on('show-window', () => {
   mainWindow.show();
 });
+
+function downloadStarted(downloadItem) {
+  downloadItem.on('done', (event, state) => { // notify user on download complete
+    if (state === 'completed') {
+      const filename = downloadItem.getSavePath();
+      const notification = new Notification({
+        title: 'Download Complete',
+        body: filename,
+      });
+      notification.on('click', () => {
+        shell.showItemInFolder(filename);
+      });
+      notification.show();
+    }
+  });
+}
+electronDL({ onStarted: downloadStarted });
