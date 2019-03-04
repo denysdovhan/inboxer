@@ -2,14 +2,12 @@ const { ipcRenderer: ipc } = require('electron');
 const checkUnreads = require('./unreads');
 const { $, $$, renderOverlayIcon } = require('./utils');
 
-const doneURL = 'https://mail.google.com/mail/#search/-in%3Ainbox+-in%3Aspam+-in%3Atrash+-in%3Achats';
+const settingsURL = 'https://mail.google.com/mail/u/0/#settings/general';
+const doneURL = 'https://mail.google.com/mail/u/0/#search/-in%3Ainbox+-in%3Aspam+-in%3Atrash+-in%3Achats';
 const contactsURL = 'https://contacts.google.com/';
 const addAccountURL = 'https://accounts.google.com/AddSession';
 
-ipc.on('toggle-sidebar', () => $('div.gb_zc').click());
-
-ipc.on('show-preferences', () => $('.oin9Fc.cQ.lN').click());
-
+ipc.on('toggle-sidebar', () => $('div.gb_td div[aria-label="Main menu"]').click());
 
 function selectFolder(name) {
   const selector = `div.TK div.aim div.TO[data-tooltip="${name}"]`;
@@ -28,6 +26,8 @@ function loadURL(url) {
   window.location.assign(url);
 }
 
+ipc.on('show-preferences', () => loadURL(settingsURL));
+
 // primary folder shortcuts
 
 ipc.on('go-to-inbox', () => selectFolder('Inbox'));
@@ -43,7 +43,12 @@ ipc.on('go-to-trash', () => selectFolder('Trash'));
 ipc.on('go-to-spam', () => selectFolder('Spam'));
 ipc.on('go-to-contacts', () => loadURL(contactsURL));
 
-ipc.on('go-to-search', () => $('input.gb_Df').focus());
+ipc.on('go-to-search', () => {
+  const searchBar = $('div.gb_td input[aria-label="Search mail"]');
+  if (searchBar) {
+    searchBar.focus();
+  }
+});
 
 ipc.on('sign-out', () => $('#gb_71').click());
 ipc.on('add-account', () => loadURL(addAccountURL));
