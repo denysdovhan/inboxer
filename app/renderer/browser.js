@@ -2,29 +2,51 @@ const { ipcRenderer: ipc } = require('electron');
 const checkUnreads = require('./unreads');
 const { $, $$, renderOverlayIcon } = require('./utils');
 
-ipc.on('toggle-sidebar', () => $('.aO.AK.ew').click());
+const doneURL = 'https://mail.google.com/mail/#search/-in%3Ainbox+-in%3Aspam+-in%3Atrash+-in%3Achats';
+const contactsURL = 'https://contacts.google.com/';
+const addAccountURL = 'https://accounts.google.com/AddSession';
+
+ipc.on('toggle-sidebar', () => $('div.gb_zc').click());
 
 ipc.on('show-preferences', () => $('.oin9Fc.cQ.lN').click());
 
+
+function selectFolder(name) {
+  const selector = `div.TK div.aim div.TO[data-tooltip="${name}"]`;
+  const folder = $(selector);
+  if (folder) {
+    folder.click();
+  } else {
+    // if folder was not found, try loading correct URL
+    const urlName = name.split(' ')[0].toLowerCase();
+    const url = `https://mail.google.com/mail/#${urlName}`;
+    window.location.assign(url);
+  }
+}
+
+function loadURL(url) {
+  window.location.assign(url);
+}
+
 // primary folder shortcuts
 
-ipc.on('go-to-inbox', () => $$('.pa .oin9Fc.cN')[0].click());
-ipc.on('go-to-snoozed', () => $$('.pa .oin9Fc.cN')[1].click());
-ipc.on('go-to-done', () => $$('.pa .oin9Fc.cN')[2].click());
+ipc.on('go-to-inbox', () => selectFolder('Inbox'));
+ipc.on('go-to-snoozed', () => selectFolder('Snoozed'));
+ipc.on('go-to-done', () => loadURL(doneURL));
 
 // secondary folder shortcuts
 
-ipc.on('go-to-drafts', () => $$('.pa + .Y .oin9Fc.cQ')[0].click());
-ipc.on('go-to-sent', () => $$('.pa + .Y .oin9Fc.cQ')[1].click());
-ipc.on('go-to-reminders', () => $$('.pa + .Y .oin9Fc.cQ')[2].click());
-ipc.on('go-to-trash', () => $$('.pa + .Y .oin9Fc.cQ')[3].click());
-ipc.on('go-to-spam', () => $$('.pa + .Y .oin9Fc.cQ')[4].click());
-ipc.on('go-to-contacts', () => $$('.pa + .Y .oin9Fc.cQ')[5].click());
+ipc.on('go-to-drafts', () => selectFolder('Drafts'));
+ipc.on('go-to-sent', () => selectFolder('Sent'));
+ipc.on('go-to-reminders', () => $$('.pa + .Y .oin9Fc.cQ')[2].click()); // **FIXME**
+ipc.on('go-to-trash', () => selectFolder('Trash'));
+ipc.on('go-to-spam', () => selectFolder('Spam'));
+ipc.on('go-to-contacts', () => loadURL(contactsURL));
 
-ipc.on('go-to-search', () => $('.gc.sp.g-lW').click());
+ipc.on('go-to-search', () => $('input.gb_Df').focus());
 
 ipc.on('sign-out', () => $('#gb_71').click());
-ipc.on('add-account', () => $('.gb_Fa.gb_Nf.gb_Ee.gb_Eb').click());
+ipc.on('add-account', () => loadURL(addAccountURL));
 
 ipc.on('render-overlay-icon', (event, unreadsCount) => {
   ipc.send(

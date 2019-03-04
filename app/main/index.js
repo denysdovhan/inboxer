@@ -1,4 +1,3 @@
-const fs = require('fs');
 const path = require('path');
 const {
   app, BrowserWindow, Menu, shell, ipcMain, nativeImage,
@@ -18,7 +17,7 @@ app.setAppUserModelId('com.denysdovhan.inboxer');
 require('electron-dl')();
 require('electron-context-menu')();
 
-const mainURL = 'https://inbox.google.com/';
+const mainURL = 'https://mail.google.com/';
 
 let mainWindow;
 let isQuitting = false;
@@ -35,12 +34,12 @@ function allowedUrl(url) {
     'https://accounts.google.com/@(u|AccountChooser|AddSession|ServiceLogin|CheckCookie|Logout){**/**,**}',
     'https://accounts.google.com/signin/@(usernamerecovery|recovery|challenge|selectchallenge){**/**,**}',
     'http://www.google.*/accounts/Logout2**',
-    'https://inbox.google.com{**/**,**}',
-    'https://{accounts.youtube,inbox.google}.com/accounts/@(SetOSID|SetSID)**',
     'https://www.google.com/a/**/acs',
     'https://**.okta.com/**',
     'https://google.*/accounts/**',
     'https://www.google.**/accounts/signin/continue**',
+    'https://mail.google.com/**',
+    'https://contacts.google.com/**',
     path.join('file://', __dirname, '../renderer/preferences**'),
   ];
 
@@ -111,10 +110,6 @@ app.on('ready', () => {
   }
 
   const { webContents } = mainWindow;
-
-  webContents.on('dom-ready', () => {
-    webContents.insertCSS(fs.readFileSync(path.join(__dirname, '../renderer/browser.css'), 'utf8'));
-  });
 
   webContents.on('will-navigate', (e, url) => {
     if (config.get('sendAnalytics')) analytics.track('will-navigate');
