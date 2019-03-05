@@ -3,7 +3,7 @@ const checkUnreads = require('./unreads');
 const { $, $$, renderOverlayIcon } = require('./utils');
 
 const settingsURL = 'https://mail.google.com/mail/u/0/#settings/general';
-const doneURL = 'https://mail.google.com/mail/u/0/#search/-in%3Ainbox+-in%3Aspam+-in%3Atrash+-in%3Achats';
+const doneURL = 'https://mail.google.com/mail/u/0/#search/-in%3Ainbox+-in%3Aspam+-in%3Atrash+-in%3Achats+-in%3Asnoozed+-in%3Adrafts+-in%3Asent';
 const contactsURL = 'https://contacts.google.com/';
 const addAccountURL = 'https://accounts.google.com/AddSession';
 
