@@ -269,7 +269,7 @@ const itemItems = [
   {
     label: 'Snooze',
     click(menuItem, focusedWindow) {
-      sendKeybinding(focusedWindow, 's');
+      sendKeybinding(focusedWindow, 'b');
     },
   },
   // {
@@ -331,7 +331,7 @@ const itemItems = [
   {
     label: 'Move to…',
     click(menuItem, focusedWindow) {
-      sendKeybinding(focusedWindow, '.');
+      sendKeybinding(focusedWindow, 'v');
     },
   },
   {
