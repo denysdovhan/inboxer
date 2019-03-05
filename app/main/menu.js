@@ -272,6 +272,12 @@ const itemItems = [
       sendKeybinding(focusedWindow, 'b');
     },
   },
+  {
+    label: 'Star',
+    click(menuItem, focusedWindow) {
+      sendKeybinding(focusedWindow, 's');
+    },
+  },
   // {
   //   label: 'Pin',
   //   click(menuItem, focusedWindow) {
