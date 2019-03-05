@@ -329,12 +329,6 @@ const itemItems = [
     },
   },
   {
-    label: 'Mute',
-    click(menuItem, focusedWindow) {
-      sendKeybinding(focusedWindow, 'm');
-    },
-  },
-  {
     label: 'Move to…',
     click(menuItem, focusedWindow) {
       sendKeybinding(focusedWindow, '.');
