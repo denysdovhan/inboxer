@@ -94,10 +94,10 @@ Inboxer supports all Inbox by Gmail keyboard shortcuts, system-specific keybindi
 | Trash                        | <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>T</kbd>
 | Spam                         | <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>S</kbd>
 | Open Contacts                | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>
-| Search                       | <kbd>Cmd/Ctrl</kbd> <kbd>/</kbd>
-| Toggle Sidebar               | <kbd>Cmd/Ctrl</kbd> <kbd>F</kbd>
+| Search                       | <kbd>Cmd/Ctrl</kbd> <kbd>F</kbd>
+| Toggle Sidebar               | <kbd>Cmd/Ctrl</kbd> <kbd>/</kbd>
 | Toggle "Always on Top"       | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>T</kbd>
-| Keyboard Shortcuts Reference | <kbd>Shift</kbd> <kbd>,</kbd>
+| Keyboard Shortcuts Reference | <kbd>Shift</kbd> <kbd>/</kbd> or <kdb>?</kdb>
 | Toggle Developer Tools       | <kbd>Option</kbd> <kbd>Cmd</kbd> <kbd>I</kbd> _(macOS)_ or <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>I</kbd>
 
 ## Disclaimer
