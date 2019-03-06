@@ -82,7 +82,7 @@ Inboxer supports all Inbox by Gmail keyboard shortcuts, system-specific keybindi
 
 | Description                  | Keys
 |------------------------------|---------
-| Preferences                  | <kbd>Cmd/Ctrl</kbd> <kbd>,</kbd>
+| Preferences                  | <kbd>Cmd/Ctrl</kbd> <kbd>P</kbd>
 | Compose Message              | <kbd>Cmd/Ctrl</kbd> <kbd>N</kbd>
 | Create Reminder              | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>N</kbd>
 | Go to Inbox                  | <kbd>Cmd/Ctrl</kbd> <kbd>I</kbd>
