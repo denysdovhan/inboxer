@@ -53,7 +53,7 @@ const settingsItems = [
 
   {
     label: 'Account Preferences',
-    accelerator: 'Cmd+,',
+    accelerator: 'CmdOrCtrl+,',
     click(menuItem, focusedWindow) {
       sendAction(focusedWindow, 'show-preferences');
     },
