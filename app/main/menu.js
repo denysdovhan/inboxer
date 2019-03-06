@@ -63,6 +63,7 @@ const settingsItems = [
 
   {
     label: 'Preferences',
+    accelerator: 'CmdOrCtrl+P',
     click() {
       preferences.showPreferencesWindow();
     },
