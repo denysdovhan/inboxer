@@ -43,7 +43,7 @@ const settingsItems = [
     checked: config.get('autoHideMenuBar'),
     visible: !isDarwin,
     click(menuItem, focusedWindow) {
-      config.set('autoHideMenuBar', !menuItem.checked);
+      config.set('autoHideMenuBar', menuItem.checked);
       focusedWindow.setAutoHideMenuBar(menuItem.checked);
       focusedWindow.setMenuBarVisibility(!menuItem.checked);
     },
