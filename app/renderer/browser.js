@@ -17,7 +17,7 @@ function selectFolder(name) {
   } else {
     // if folder was not found, try loading correct URL
     const urlName = name.split(' ')[0].toLowerCase();
-    const url = `https://mail.google.com/mail/#${urlName}`;
+    const url = `https://mail.google.com/mail/u/0/#${urlName}`;
     window.location.assign(url);
   }
 }
