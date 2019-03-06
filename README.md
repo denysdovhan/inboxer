@@ -5,6 +5,9 @@
 > Help us to implement all Inboxer features with GMail service
 >
 > Ready to help? Just [open an issue](https://github.com/denysdovhan/inboxer/issues/new)!
+>
+> **UPDATE (2019-03-06):** we're in the process of converting Inboxer to work with Gmail. Stay tuned.
+
 
 <div align="center">
   <img src="app/static/Icon.png" width="128px">
