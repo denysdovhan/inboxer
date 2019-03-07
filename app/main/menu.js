@@ -94,13 +94,6 @@ const fileItems = [
       sendKeybinding(focusedWindow, 'c');
     },
   },
-  {
-    label: 'Create Reminder',
-    accelerator: 'Shift+CmdOrCtrl+N',
-    click(menuItem, focusedWindow) {
-      sendKeybinding(focusedWindow, 't');
-    },
-  },
 ];
 
 const viewItems = [
@@ -138,13 +131,6 @@ const viewItems = [
     accelerator: 'CmdOrCtrl+Shift+S',
     click(menuItem, focusedWindow) {
       sendAction(focusedWindow, 'go-to-sent');
-    },
-  },
-  {
-    label: 'Reminders',
-    accelerator: 'CmdOrCtrl+Shift+R',
-    click(menuItem, focusedWindow) {
-      sendAction(focusedWindow, 'go-to-reminders');
     },
   },
   {

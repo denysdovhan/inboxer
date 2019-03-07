@@ -84,13 +84,11 @@ Inboxer supports all Inbox by Gmail keyboard shortcuts, system-specific keybindi
 |------------------------------|---------
 | Preferences                  | <kbd>Cmd/Ctrl</kbd> <kbd>P</kbd>
 | Compose Message              | <kbd>Cmd/Ctrl</kbd> <kbd>N</kbd>
-| Create Reminder              | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>N</kbd>
 | Go to Inbox                  | <kbd>Cmd/Ctrl</kbd> <kbd>I</kbd>
 | Go to Snoozed                | <kbd>Cmd/Ctrl</kbd> <kbd>S</kbd>
 | Go to Done                   | <kbd>Cmd/Ctrl</kbd> <kbd>D</kbd>
 | Drafts                       | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>D</kbd>
 | Sent                         | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>S</kbd>
-| Reminders                    | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>R</kbd>
 | Trash                        | <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>T</kbd>
 | Spam                         | <kbd>Alt</kbd> <kbd>Shift</kbd> <kbd>S</kbd>
 | Open Contacts                | <kbd>Cmd/Ctrl</kbd> <kbd>Shift</kbd> <kbd>C</kbd>

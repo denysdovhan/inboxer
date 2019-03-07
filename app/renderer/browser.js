@@ -1,6 +1,6 @@
 const { ipcRenderer: ipc } = require('electron');
 const checkUnreads = require('./unreads');
-const { $, $$, renderOverlayIcon } = require('./utils');
+const { $, renderOverlayIcon } = require('./utils');
 
 const settingsURL = 'https://mail.google.com/mail/u/0/#settings/general';
 const doneURL = 'https://mail.google.com/mail/u/0/#search/-in%3Ainbox+-in%3Aspam+-in%3Atrash+-in%3Achats+-in%3Asnoozed+-in%3Adrafts+-in%3Asent';
@@ -38,7 +38,6 @@ ipc.on('go-to-done', () => loadURL(doneURL));
 
 ipc.on('go-to-drafts', () => selectFolder('Drafts'));
 ipc.on('go-to-sent', () => selectFolder('Sent'));
-ipc.on('go-to-reminders', () => $$('.pa + .Y .oin9Fc.cQ')[2].click()); // **FIXME**
 ipc.on('go-to-trash', () => selectFolder('Trash'));
 ipc.on('go-to-spam', () => selectFolder('Spam'));
 ipc.on('go-to-contacts', () => loadURL(contactsURL));
