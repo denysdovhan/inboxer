@@ -1,11 +1,12 @@
 const analytics = require('./analytics');
+const config = require('./config');
 
 const isDarwin = process.platform === 'darwin';
 const isLinux = process.platform === 'linux';
 const isWindows = process.platform === 'win32';
 
 function sendAction(win, action) {
-  analytics.track(action);
+  if (config.get('sendAnalytics')) analytics.track(action);
   if (isDarwin) win.restore();
   win.webContents.send(action);
 }
