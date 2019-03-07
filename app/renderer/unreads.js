@@ -97,7 +97,12 @@ function getSnoozedMessages() {
     });
 }
 
-function checkUnreads(period = 2000) {
+function checkUnreads() {
+  let period = parseFloat(config.get('notify.period'), 10) * 1000; // convert seconds to milliseconds
+  if (period < 100) {
+    period = 100; // no faster than every 100 ms
+  }
+
   // skip if we're not inside the inbox
   const isInbox = $('.hA [title=Inbox]');
   if (!isInbox) {

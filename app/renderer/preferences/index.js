@@ -9,6 +9,7 @@ PreferencesWindow.sendAnalyticsCheckbox = document.querySelector('#sendAnalytics
 PreferencesWindow.notifyUnread = document.querySelector('#notifyUnread');
 PreferencesWindow.notifySnoozed = document.querySelector('#notifySnoozed');
 PreferencesWindow.notifyDownload = document.querySelector('#notifyDownload');
+PreferencesWindow.notifyPeriod = document.querySelector('#notifyPeriod');
 
 PreferencesWindow.setEventListeners = () => {
   const self = this;
@@ -17,6 +18,7 @@ PreferencesWindow.setEventListeners = () => {
     config.set('notify.unread', self.notifyUnread.checked);
     config.set('notify.snoozed', self.notifySnoozed.checked);
     config.set('notify.download', self.notifyDownload.checked);
+    config.set('notify.period', parseFloat(self.notifyPeriod.value));
     remote.getCurrentWindow().close();
   });
 };
@@ -26,6 +28,7 @@ PreferencesWindow.init = () => {
   this.notifyUnread.checked = config.get('notify.unread');
   this.notifySnoozed.checked = config.get('notify.snoozed');
   this.notifyDownload.checked = config.get('notify.download');
+  this.notifyPeriod.value = config.get('notify.period');
   PreferencesWindow.setEventListeners();
 };
 
