@@ -15,6 +15,7 @@ module.exports = new ElectronStore({
       unread: true,
       snoozed: true,
       download: true,
+      period: 2,
     },
     sendAnalytics: true,
   },

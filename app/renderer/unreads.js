@@ -119,9 +119,14 @@ function findUnreadSnoozedMessages() {
   return notifications;
 }
 
-function checkUnreads(period = 2000) {
+function checkUnreads() {
   if (typeof checkUnreads.haveUnread === 'undefined') {
     checkUnreads.haveUnread = false;
+  }
+
+  let period = parseFloat(config.get('notify.period'), 10) * 1000; // convert seconds to milliseconds
+  if (period < 100) {
+    period = 100; // no faster than every 100 ms
   }
 
   const numUnread = extractNumberUnread();
