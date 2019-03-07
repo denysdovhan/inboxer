@@ -206,6 +206,9 @@ ipcMain.on('show-window', () => {
 });
 
 function downloadStarted(downloadItem) {
+  if (!config.get('notify.download')) {
+    return;
+  }
   downloadItem.on('done', (event, state) => { // notify user on download complete
     if (state === 'completed') {
       const filename = downloadItem.getSavePath();

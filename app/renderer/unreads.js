@@ -1,8 +1,10 @@
-const { ipcRenderer: ipc } = require('electron');
+const { ipcRenderer: ipc, remote } = require('electron');
 const path = require('path');
 const {
   $, $$, sendNotification, sendClick,
 } = require('./utils');
+
+const config = remote.require('../../app/main/config');
 
 const seenMessages = new Map();
 
@@ -68,6 +70,8 @@ function findUnreadSnoozedMessages() {
     map.set(key, false);
   });
 
+  const notifyUnread = config.get('notify.unread');
+  const notifySnoozed = config.get('notify.snoozed');
   // iterate through all messages (rows in table)
   $$('table.F > tbody > tr', messageTable).forEach((message) => {
     let messageType = null;
@@ -90,13 +94,16 @@ function findUnreadSnoozedMessages() {
 
       // if message hasn't been seen before, schedule notification
       if (!seenMessages.has(key)) {
-        const icon = (messageType === 'unread') ? iconMail : iconSnoozed;
-        notifications.push({
-          message,
-          title: sender,
-          body: subject,
-          icon: `file://${icon}`,
-        });
+        if ((messageType === 'unread' && notifyUnread)
+            || (messageType === 'snoozed' && notifySnoozed)) {
+          const icon = (messageType === 'unread') ? iconMail : iconSnoozed;
+          notifications.push({
+            message,
+            title: sender,
+            body: subject,
+            icon: `file://${icon}`,
+          });
+        }
       }
       seenMessages.set(key, true); // mark message as seen
     }
