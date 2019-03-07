@@ -1,8 +1,10 @@
-const { ipcRenderer: ipc } = require('electron');
+const { ipcRenderer: ipc, remote } = require('electron');
 const path = require('path');
 const {
   $, $$, ancestor, sendNotification, sendClick,
 } = require('./utils');
+
+const config = remote.require('../../app/main/config');
 
 const seenMessages = new Map();
 
@@ -117,13 +119,15 @@ function checkUnreads(period = 2000) {
     map.set(key, false);
   });
 
+  const notifyUnread = config.get('notify.unread');
+  const notifySnoozed = config.get('notify.snoozed');
   unreads.forEach((message) => {
     const {
       element, subject, sender, avatar,
     } = message;
     const key = keyByMessage(message);
     // do not show the same notification every time on start up
-    if (!checkUnreads.startingUp && !seenMessages.has(key)) {
+    if (notifyUnread && !checkUnreads.startingUp && !seenMessages.has(key)) {
       sendNotification({
         title: sender,
         body: subject,
@@ -144,7 +148,7 @@ function checkUnreads(period = 2000) {
     } = message;
     const key = keyByMessage(message);
     // do not show the same notification every time on start up
-    if (!checkUnreads.startingUp && !seenMessages.has(key)) {
+    if (notifySnoozed && !checkUnreads.startingUp && !seenMessages.has(key)) {
       sendNotification({
         title: sender,
         body: subject,

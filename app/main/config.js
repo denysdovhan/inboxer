@@ -11,6 +11,11 @@ module.exports = new ElectronStore({
     bounceDockIcon: false,
     flashWindowOnMessage: false,
     autoHideMenuBar: false,
+    notify: {
+      unread: true,
+      snoozed: true,
+      download: true,
+    },
     sendAnalytics: true,
   },
 });
