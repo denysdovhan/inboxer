@@ -2,12 +2,9 @@
 >
 > As you know Google is going to take down Inbox service, so we want to keep this project alive.
 >
-> Help us to implement all Inboxer features with GMail service
+> We are in the process of adapting all Inboxer features to work with Gmail service.
 >
 > Ready to help? Just [open an issue](https://github.com/denysdovhan/inboxer/issues/new)!
->
-> **UPDATE (2019-03-06):** we're in the process of converting Inboxer to work with Gmail. Stay tuned.
-
 
 <div align="center">
   <img src="app/static/Icon.png" width="128px">
@@ -22,9 +19,9 @@
   </p>
 </div>
 
-> Unofficial, free and open-source Google Inbox Desktop App
+> Unofficial, free and open-source Google Gmail Desktop App
 
-Inboxer — is an unofficial Inbox by Gmail client for desktop platforms. It's built on top of Inbox by Gmail web-version, has pleasant UI and supports useful keyboard shortcuts.
+Inboxer — started out as an unofficial Inbox by Gmail client for desktop platforms. However, Google plans to discontinue Inbox at the end of March 2019 ([see official announcement](https://www.blog.google/products/gmail/inbox-signing-find-your-favorite-features-new-gmail/)). To keep Inboxer alive we have converted it to work with Gmail. Inboxer is now built on top of Gmail web-version. It has pleasant UI and supports useful keyboard shortcuts.
 
 Inboxer is highly inspired by these projects:
 
@@ -36,7 +33,7 @@ Check out these ones as great examples of Electron applications. All of them are
 
 ## Features
 
-* Familiar Inbox by Gmail interface
+* Familiar Gmail interface
 * Cross-platform (macOS/Linux/Windows)
 * Useful Keyboard shortcuts
 * Multiple accounts
@@ -51,6 +48,7 @@ All feature requests and contributions are welcome!
 
 ## Screenshot
 
+* **TODO:** Update screenshot to show latest version working with Gmail
 ![Inboxer on Mac](./media/inboxer-mac.png)
 
 ## Installation
@@ -78,7 +76,7 @@ $ brew cask install inboxer
 
 ## Keyboard shortcuts
 
-Inboxer supports all Inbox by Gmail keyboard shortcuts, system-specific keybindings and more. Additional keybindings are listed below:
+Inboxer supports all Gmail keyboard shortcuts, system-specific keybindings and more. Additional keybindings are listed below:
 
 | Description                  | Keys
 |------------------------------|---------
@@ -100,7 +98,7 @@ Inboxer supports all Inbox by Gmail keyboard shortcuts, system-specific keybindi
 
 ## Disclaimer
 
-This code is in no way affiliated with, authorised, maintained, sponsored or endorsed by Google or any of its affiliates or subsidiaries. This is an independent and unofficial Inbox by Gmail app. Use it at your own risk.
+This code is in no way affiliated with, authorised, maintained, sponsored or endorsed by Google or any of its affiliates or subsidiaries. This is an independent and unofficial Gmail app. Use it at your own risk.
 
 ## End User License Agreement
 
