@@ -18,5 +18,6 @@ module.exports = new ElectronStore({
       period: 2,
     },
     sendAnalytics: true,
+    displayMigrationInfo: true,
   },
 });
