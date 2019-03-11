@@ -1,6 +1,6 @@
 const path = require('path');
 const {
-  app, BrowserWindow, Menu, shell, ipcMain, nativeImage, Notification,
+  app, BrowserWindow, Menu, shell, ipcMain, nativeImage, Notification, dialog,
 } = require('electron');
 const log = require('electron-log');
 const isDev = require('electron-is-dev');
@@ -51,6 +51,39 @@ function allowedUrl(url) {
   return minimatch(url, urls);
 }
 
+// Inform the user about Google's plan to discontinue Inbox
+function showMigrationDialog(win) {
+  if (config.get('displayMigrationInfo') === 'no >1.3.0') { // indicates dialog was dismissed from version >1.3.0
+    return;
+  }
+
+  const message = 'This version of Inboxer has been migrated to use Gmail';
+  const detail = `Inboxer was originally developed to provide a view of Google's Inbox packaged \
+in a desktop app. However, Google has announced plans to discontinue Inbox at the end of March 2019.
+See Google's official announcement here:
+https://www.blog.google/products/gmail/inbox-signing-find-your-favorite-features-new-gmail/
+
+Versions >= 1.3.0 have been migrated from Inbox to Gmail to ensure Inboxer continues \
+to work after Google pulls the plug on Inbox.
+Versions 1.2.x will continue working with Inbox until the bitter end.`;
+
+  dialog.showMessageBox(win, {
+    type: 'info',
+    icon: nativeImage.createFromPath(path.join(__dirname, '..', 'static/Icon.png')),
+    title: 'Important Message',
+    message,
+    detail,
+    checkboxLabel: 'Show this window again',
+    checkboxChecked: true,
+    buttons: ['Ok'],
+    defaultId: 0,
+  }, (response, checkBoxChecked) => {
+    if (!checkBoxChecked) {
+      config.set('displayMigrationInfo', 'no >1.3.0');
+    }
+  });
+}
+
 function createMainWindow() {
   const windowState = config.get('windowState');
 
@@ -84,6 +117,7 @@ function createMainWindow() {
   // Docs: https://electronjs.org/docs/api/browser-window#showing-window-gracefully
   win.once('ready-to-show', () => {
     win.show();
+    showMigrationDialog(win);
   });
 
   win.on('close', (e) => {
