@@ -47,6 +47,38 @@ function allowedUrl(url) {
   return minimatch(url, urls);
 }
 
+// Inform the user about Google's plan to discontinue Inbox
+function showMigrationDialog(win) {
+  if (config.get('displayMigrationInfo') === 'no 1.2.x') { // indicates dialog was dismissed from version 1.2.x
+    return;
+  }
+
+  const message = 'This version of Inboxer will stop working after March 2019';
+  const detail = `Google has announced plans to discontinue Inbox at the end of March 2019. \
+See Google's official announcement here:
+https://www.blog.google/products/gmail/inbox-signing-find-your-favorite-features-new-gmail/
+
+Versions >= 1.3.0 have been migrated from Inbox to Gmail to ensure Inboxer continues \
+to work after Google pulls the plug on Inbox.
+Versions 1.2.x will continue working with Inbox until the bitter end.`;
+
+  dialog.showMessageBox(win, {
+    type: 'info',
+    icon: nativeImage.createFromPath(path.join(__dirname, '..', 'static/Icon.png')),
+    title: 'Important Message',
+    message,
+    detail,
+    checkboxLabel: 'Show this window again',
+    checkboxChecked: true,
+    buttons: ['Ok'],
+    defaultId: 0,
+  }, (response, checkBoxChecked) => {
+    if (!checkBoxChecked) {
+      config.set('displayMigrationInfo', 'no 1.2.x');
+    }
+  });
+}
+
 function createMainWindow() {
   const windowState = config.get('windowState');
 
@@ -80,6 +112,7 @@ function createMainWindow() {
   // Docs: https://electronjs.org/docs/api/browser-window#showing-window-gracefully
   win.once('ready-to-show', () => {
     win.show();
+    showMigrationDialog(win);
   });
 
   win.on('close', (e) => {
@@ -96,39 +129,6 @@ function createMainWindow() {
 
   return win;
 }
-
-// Inform the user about Google's plan to discontinue Inbox
-function showMigrationDialog() {
-  if (config.get('displayMigrationInfo') === 'no 1.2.x') { // indicates dialog was dismissed from version 1.2.x
-    return;
-  }
-
-  const message = 'This version of Inboxer will stop working after March 2019';
-  const detail = `Google has announced plans to discontinue Inbox at the end of March 2019. \
-See Google's official announcement here:
-https://www.blog.google/products/gmail/inbox-signing-find-your-favorite-features-new-gmail/
-
-Versions >= 1.3.0 have been migrated from Inbox to Gmail to ensure Inboxer continues \
-to work after Google pulls the plug on Inbox.
-Versions 1.2.x will continue working with Inbox until the bitter end.`;
-
-  dialog.showMessageBox(mainWindow, {
-    type: 'info',
-    icon: nativeImage.createFromPath(path.join(__dirname, '..', 'static/Icon.png')),
-    title: 'Important Message',
-    message,
-    detail,
-    checkboxLabel: 'Show this window again',
-    checkboxChecked: true,
-    buttons: ['Ok'],
-    defaultId: 0,
-  }, (response, checkBoxChecked) => {
-    if (!checkBoxChecked) {
-      config.set('displayMigrationInfo', 'no 1.2.x');
-    }
-  });
-}
-
 
 app.on('ready', () => {
   Menu.setApplicationMenu(appMenu);
@@ -147,7 +147,6 @@ app.on('ready', () => {
 
   webContents.on('dom-ready', () => {
     webContents.insertCSS(fs.readFileSync(path.join(__dirname, '../renderer/browser.css'), 'utf8'));
-    showMigrationDialog();
   });
 
   webContents.on('will-navigate', (e, url) => {
