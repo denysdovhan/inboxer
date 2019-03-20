@@ -74,6 +74,20 @@ $ brew cask install inboxer
 
 [**Download**][download] the `.exe` file.
 
+### Package Inboxer from source
+
+You'll need `electron` and `npm` installed in your system.
+[**Download**][download] and extract the source code (`.zip` or `.tar.gz` file).
+Inside the source code folder, run:
+```
+$ npm install
+```
+Then package the app with:
+```
+$ npm run dist
+```
+This builds packages for all architectures. Use `dist:mac`, `dist:linux`, or `dist:win` to package a single architecture. The packages will be found in the `dist` folder.
+
 ## Keyboard shortcuts
 
 Inboxer supports all Gmail keyboard shortcuts, system-specific keybindings and more. Additional keybindings are listed below:
