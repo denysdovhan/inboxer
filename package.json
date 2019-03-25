@@ -97,7 +97,8 @@
     "linux": {
       "target": [
         "AppImage",
-        "deb"
+        "deb",
+        "snap"
       ]
     },
     "win": {
