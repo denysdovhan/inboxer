@@ -1,0 +1,22 @@
+/* Tooltip to display link contents */
+/* <div class="AO"> contains message view area (right side of window) */
+div.AO a[href]::after {
+    content: attr(href);
+    position: absolute;
+    transform: translateY(100%);
+    left: 0;
+    background: rgba(0,0,0,0.7);
+    text-align: center;
+    color: #fff;
+    font-size: small;
+    border-radius: 5px;
+    pointer-events: none;
+    padding: 4px 8px;
+    z-index:99;
+    opacity:0;
+    transition: opacity 0.5s;
+}
+
+div.AO a[href]:hover::after {
+   opacity:1
+}
