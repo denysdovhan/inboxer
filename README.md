@@ -66,7 +66,7 @@ $ brew cask install inboxer
 
 ### Linux
 
-[**Download**][download] the `.AppImage`* or `.deb` file.
+[**Download**][download] the `.AppImage`* or `.deb` or `.snap` file.
 
 \* — Notice, that the `AppImage` needs to be [made executable](http://discourse.appimage.org/t/how-to-make-an-appimage-executable/80) after download.
 
