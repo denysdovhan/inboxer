@@ -1,10 +1,10 @@
-> ## 🙏🏻 This project needs your help! 🙏🏻
+> ## 🚧 This project is deprecated! 🚧
 >
-> As you know Google is going to take down Inbox service, so we want to keep this project alive.
+> As you know Google is going to take down Inbox service.
 >
-> We are in the process of adapting all Inboxer features to work with Gmail service.
+> **This project is not maintained anymore. Since Inbox is closed this project has to be closed as well. It just cannot operate normally without Inbox.**
 >
-> Ready to help? Just [open an issue](https://github.com/denysdovhan/inboxer/issues/new)!
+> You can find more information [here](https://github.com/denysdovhan/inboxer/issues/101).
 
 <div align="center">
   <img src="app/static/Icon.png" width="128px">
