@@ -1,39 +1,65 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Common Meta -->
-    <meta name="description" content="Unofficial, free and open-source Google Inbox Desktop App">
-    <meta name="author" content="Denys Dovhan">
+    <meta
+      name="description"
+      content="Unofficial, free and open-source Google Inbox Desktop App"
+    />
+    <meta name="author" content="Denys Dovhan" />
     <!-- Open Graph -->
-    <meta property="og:url" content="https://denysdovhan.com/inboxer/">
-    <meta property="og:title" content="Inboxer">
-    <meta property="og:description" content="Unofficial, free and open-source Google Inbox Desktop App">
-    <meta property="og:image" content="https://denysdovhan.com/inboxer/images/inboxer-promo.jpg">
+    <meta property="og:url" content="https://denysdovhan.com/inboxer/" />
+    <meta property="og:title" content="Inboxer" />
+    <meta
+      property="og:description"
+      content="Unofficial, free and open-source Google Inbox Desktop App"
+    />
+    <meta
+      property="og:image"
+      content="https://denysdovhan.com/inboxer/images/inboxer-promo.jpg"
+    />
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:creator" content="@denysdovhan">
-    <meta name="twitter:title" content="Inboxer">
-    <meta name="twitter:description" content="Unofficial, free and open-source Google Inbox Desktop App">
-    <meta name="twitter:image" content="https://denysdovhan.com/inboxer/images/inboxer-promo.jpg">
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@denysdovhan" />
+    <meta name="twitter:title" content="Inboxer" />
+    <meta
+      name="twitter:description"
+      content="Unofficial, free and open-source Google Inbox Desktop App"
+    />
+    <meta
+      name="twitter:image"
+      content="https://denysdovhan.com/inboxer/images/inboxer-promo.jpg"
+    />
     <!-- Title -->
     <title>Inboxer — Google Inbox Desktop App</title>
     <!-- Icon -->
-    <link rel="icon" href="images/favicon.ico" sizes="32x32">
+    <link rel="icon" href="images/favicon.ico" sizes="32x32" />
     <!-- Styles -->
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="//cdn.muicss.com/mui-0.9.30/css/mui.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="//cdn.muicss.com/mui-0.9.30/css/mui.min.css" />
+    <link rel="stylesheet" href="styles.css" />
     <!-- Scripts -->
     <script src="//cdn.muicss.com/mui-0.9.30/js/mui.min.js"></script>
     <script defer src="main.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-40496885-12"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-40496885-12"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
       gtag('config', 'UA-40496885-12');
     </script>
@@ -41,22 +67,43 @@
   <body>
     <header class="page-header">
       <div class="page-header__content">
-        <h1 class="heading">Inboxer</h1>
-        <p class="mui--text-dark-secondary mui--text-headline subheading">Unofficial, free and open-source Google Inbox Desktop App</p>
+        <h1 class="heading">Inboxer <sup>deprecated</sup></h1>
+        <p class="mui--text-dark-secondary mui--text-headline subheading">
+          Unofficial, free and open-source Google Inbox Desktop App
+        </p>
         <div>
-          <a href="https://github.com/denysdovhan/inboxer/releases/latest" id="download" class="mui-btn mui-btn--primary mui-btn--large mui-btn--raised download-btn">
+          <a
+            href="https://github.com/denysdovhan/inboxer/releases/latest"
+            id="download"
+            class="mui-btn mui-btn--primary mui-btn--large mui-btn--raised mui--is-disabled download-btn"
+            title="Download is disabled. Project is deprecated."
+          >
             <span class="fa fa-download"></span>
             <span id="download-content">Download</span>
           </a>
-          <a href="https://github.com/denysdovhan/inboxer" class="mui-btn mui-btn--large mui-btn--raised">
+          <a
+            href="https://github.com/denysdovhan/inboxer"
+            class="mui-btn mui-btn--large mui-btn--raised"
+          >
             <span class="fa fa-github"></span>
             Source
           </a>
-          <p class="mui--text-dark-secondary mui--text-caption download-caption">
-            macOS and Linux versions are available<br>
-            <a href="https://github.com/denysdovhan/inboxer/releases">Other platforms</a>
+          <p class="mui--text-dark-secondary mui--text-caption caption">
+            This project is deprecated. Read the
+            <a href="https://github.com/denysdovhan/inboxer/issues/101"
+              >explanation</a
+            >
+            .
+          </p>
+          <p class="mui--text-dark-secondary mui--text-caption caption">
+            macOS and Linux versions are available<br />
+            <a href="https://github.com/denysdovhan/inboxer/releases"
+              >Other platforms</a
+            >
             &bull;
-            <a href="https://github.com/denysdovhan/inboxer#installation">Docs</a>
+            <a href="https://github.com/denysdovhan/inboxer#installation"
+              >Docs</a
+            >
           </p>
         </div>
       </div>
@@ -66,11 +113,10 @@
     </header>
     <footer class="page-footer">
       <div class="page-footer__content">
+        <p>Created by <a href="https://denysdovhan.com">Denys Dovhan</a></p>
         <p>
-          Created by <a href="https://denysdovhan.com">Denys Dovhan</a>
-        </p>
-        <p>
-          <strong>Inboxer</strong> is an independent and unofficial Google Inbox app. Use it at your own risk.
+          <strong>Inboxer</strong> is an independent and unofficial Google Inbox
+          app. Use it at your own risk.
         </p>
       </div>
     </footer>

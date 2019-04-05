@@ -11,7 +11,15 @@ body {
   font-size: 7rem;
   line-height: 1;
   font-weight: 300;
-  color: #4285F4;
+  color: #4285f4;
+}
+
+.heading sup {
+  font-size: 2rem;
+  line-height: 1;
+  color: #dd4b39;
+  position: relative;
+  top: -4rem;
 }
 
 .subheading {
@@ -48,17 +56,17 @@ body {
 .download-btn:hover,
 .download-btn:active,
 .download-btn:focus {
-  background-color: #4285F4;
+  background-color: #4285f4;
 }
 
-.download-caption {
+.caption {
   margin-top: 1rem;
 }
 
 .page-footer {
   overflow: hidden;
-  background-color: #4285F4;
-  box-shadow: 0 2px 2px rgba(0,0,0,.2) inset;
+  background-color: #4285f4;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2) inset;
 }
 
 .page-footer__content {
